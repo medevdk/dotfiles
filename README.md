@@ -10,7 +10,7 @@ Get _zsh_ up and running (not using a plugin manager)
 ```
 cd ~/dotfiles/zsh/
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-git clone https://github.com/zsh-users/zshautosuggestions.git
+git clone https://github.com/zsh-users/zsh-autosuggestions.git
 ```
 
 Get _tmux_ up and running
