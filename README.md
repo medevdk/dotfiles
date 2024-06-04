@@ -16,8 +16,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions.git
 Get _tmux_ up and running
 
 ```
-mkdir -p ~/.tmux/
-cd ~/.tmux
+cd ~/dotfiles/.tmux
 git clone https://github.com/tmux-plugins/tpm ~/dotfiles/.tmux/plugins/tpm
 ```
 
