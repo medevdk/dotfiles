@@ -1,0 +1,15 @@
+#Ignore all
+*
+
+#But allow
+!.gitignore
+
+!zsh/
+!zsh/.zshrc
+
+!vim/
+!vim/.vimrc
+
+!.tmux
+!.tmux/.tmux.conf
+
