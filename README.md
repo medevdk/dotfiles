@@ -28,11 +28,10 @@ stow zsh
 stow .tmux
 stow vim
 ```
-
-Open the terminal
+In the terminal
 
 ```
 reload
-tmux source ~/.tmux.conf
+
 CTRL-A + SHIFT I
 ```
