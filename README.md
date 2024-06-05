@@ -28,10 +28,11 @@ stow zsh
 stow .tmux
 stow vim
 ```
+
 In the terminal
 
 ```
 reload
-tmux
+
 CTRL-A + SHIFT I
 ```
