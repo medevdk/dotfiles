@@ -32,6 +32,6 @@ In the terminal
 
 ```
 reload
-
+tmux
 CTRL-A + SHIFT I
 ```
