@@ -1,11 +1,6 @@
 #https://zsh.sourceforge.io/Doc/Release/Options.html
 
 
-#tmux will auto connect to a session called TMUX when launching terminal
-if [ -z "$TMUX" ]
-then
-  tmux attach -t TMUX || tmux new -s TMUX
-fi
 
 #Change the ESC to jk
 bindkey -M viins 'jk' vi-cmd-mode
@@ -126,6 +121,13 @@ export PATH=/home/devdk/.cargo/bin:$PATH
 
 #just for funs
 fortune | cowsay -n | lolcat
+
+#tmux will auto connect to a session called TMUX when launching terminal
+if [ -z "$TMUX" ]
+then
+  tmux attach -t TMUX || tmux new -s TMUX
+fi
+
 
 #
 # Plugins - No plugin manager
