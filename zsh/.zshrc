@@ -1,5 +1,12 @@
 #https://zsh.sourceforge.io/Doc/Release/Options.html
 
+
+#tmux will auto connect to a session called TMUX when launching terminal
+if [ -z "$TMUX" ]
+then
+  tmux attach -t TMUX || tmux new -s TMUX
+fi
+
 #Change the ESC to jk
 bindkey -M viins 'jk' vi-cmd-mode
 
