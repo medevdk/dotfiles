@@ -5,7 +5,7 @@ bindkey -M viins 'jk' vi-cmd-mode
 
 #my prompt (back to normal)
 # PS1='%F{110} %2~ '$'\n''%F{110} '$'\U27a4'' '
-PS1='%F{47} %2~ '$'\n''%F{46} '$'\U27a4'' '
+PS1='%F{47 %2~ '$'\n''%F{46} '$'\U27a4'' '
 # RPROMPT='%F{241}%B%T%b%f'
 #add empty line before prompt
 precmd() { print "" }
@@ -29,6 +29,7 @@ setopt auto_cd	#cd by typing directory name if it is not a command (e.g. go will
 
 #ALIAS 
 alias cls=' clear'
+#
 #source this file
 alias reload='source $HOME/.zshrc'
 #pretty print echo $PATH
@@ -51,6 +52,10 @@ alias rsync="rsync -av"
 alias cat="bat"
 #ping only 5 times
 alias ping="ping -c 5"
+
+#in Linux set MacOs as startup disk at next boot
+#in MacOs set boot volume in Settings -> General -> Startup Disk
+alias macos="sudo asahi-bless --set-boot 1 --next"
 
 #download all website, e.g. wget https://www.google.com
 alias wget="wget --wait=2 --level=inf --limit-rate=200K --recursive --page-requisites --user-agent=Mozilla --no-parent --convert-links --adjust-extension --no-clobber -e robots=off "
