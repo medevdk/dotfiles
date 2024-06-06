@@ -1,12 +1,11 @@
 #https://zsh.sourceforge.io/Doc/Release/Options.html
 
-
-
 #Change the ESC to jk
 bindkey -M viins 'jk' vi-cmd-mode
 
 #my prompt (back to normal)
-PS1='%F{110} %2~ '$'\n''%F{110} '$'\U27a4'' '
+# PS1='%F{110} %2~ '$'\n''%F{110} '$'\U27a4'' '
+PS1='%F{47} %2~ '$'\n''%F{46} '$'\U27a4'' '
 # RPROMPT='%F{241}%B%T%b%f'
 #add empty line before prompt
 precmd() { print "" }
@@ -39,9 +38,11 @@ alias ls=" ls -l --color=auto"
 alias lsa=" ls -al"
 #list only dotfiles
 alias lsd=' ls -d .*'
+
 alias cd..=" cd .."
 alias ..=' cd ..'
 alias mkdir='mkdir -p'
+
 alias cp="cp -i -R"
 alias mv="mv -i"
 alias rm="rm -R"
@@ -50,8 +51,6 @@ alias rsync="rsync -av"
 alias cat="bat"
 #ping only 5 times
 alias ping="ping -c 5"
-#start new tmux session and name it with current directory
-alias tat="tmux new-session -As $(basename $PWD | tr . -)"
 
 #download all website, e.g. wget https://www.google.com
 alias wget="wget --wait=2 --level=inf --limit-rate=200K --recursive --page-requisites --user-agent=Mozilla --no-parent --convert-links --adjust-extension --no-clobber -e robots=off "
