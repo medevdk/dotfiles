@@ -5,7 +5,7 @@ bindkey -M viins 'jk' vi-cmd-mode
 
 #my prompt (back to normal)
 # PS1='%F{110} %2~ '$'\n''%F{110} '$'\U27a4'' '
-PS1='%F{47 %2~ '$'\n''%F{46} '$'\U27a4'' '
+PS1='%F{47} %2~ '$'\n''%F{46} '$'\U27a4'' '
 # RPROMPT='%F{241}%B%T%b%f'
 #add empty line before prompt
 precmd() { print "" }
@@ -29,7 +29,7 @@ setopt auto_cd	#cd by typing directory name if it is not a command (e.g. go will
 
 #ALIAS 
 alias cls=' clear'
-#
+
 #source this file
 alias reload='source $HOME/.zshrc'
 #pretty print echo $PATH
@@ -39,6 +39,8 @@ alias ls=" ls -l --color=auto"
 alias lsa=" ls -al"
 #list only dotfiles
 alias lsd=' ls -d .*'
+
+alias cd=" z"
 
 alias cd..=" cd .."
 alias ..=' cd ..'
@@ -142,3 +144,6 @@ source ~/dotfiles/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 #How to add zsh-syntax-highlighting see https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
 source ~/dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# zoxide, a smarter cd comand (also aliased)
+eval "$(zoxide init zsh)"
