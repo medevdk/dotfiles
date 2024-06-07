@@ -40,6 +40,7 @@ alias lsa=" ls -al"
 #list only dotfiles
 alias lsd=' ls -d .*'
 
+#use zoxide for cd
 alias cd=" z"
 
 alias cd..=" cd .."
@@ -50,6 +51,9 @@ alias cp="cp -i -R"
 alias mv="mv -i"
 alias rm="rm -R"
 alias rsync="rsync -av"
+#find dotfiles -H and gitignired -I too
+alias fd-"fd -H -I"
+
 #cat with color
 alias cat="bat"
 #ping only 5 times
