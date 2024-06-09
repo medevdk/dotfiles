@@ -133,10 +133,10 @@ export PATH=/home/devdk/.cargo/bin:$PATH
 fortune | cowsay -n | lolcat
 
 #tmux will auto connect to a session called TMUX when launching terminal
-if [ -z "$TMUX" ]
-then
-  tmux attach -t TMUX || tmux new -s TMUX
-fi
+# if [ -z "$TMUX" ]
+# then
+#   tmux attach -t TMUX || tmux new -s TMUX
+# fi
 
 
 #
