@@ -5,7 +5,7 @@ bindkey -M viins 'jk' vi-cmd-mode
 
 #my prompt (back to normal)
 # PS1='%F{110} %2~ '$'\n''%F{110} '$'\U27a4'' '
-PS1='%F{47} %2~ '$'\n''%F{46} '$'\U27a4'' '
+PS1='%F{47} %2~ '$'\n''%F{46} '$'\U27a4 '' '
 # RPROMPT='%F{241}%B%T%b%f'
 #add empty line before prompt
 precmd() { print "" }
