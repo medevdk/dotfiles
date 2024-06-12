@@ -140,14 +140,25 @@ fortune | cowsay -n | lolcat
 
 
 #
-# Plugins - No plugin manager
+# Plugins
 #
 
-#How to add zsh-autosuggestion see https://asciinema.org/a/37390
-source ~/dotfiles/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# antidote plugin manager
+_zsh_plugins=~/.zsh_plugins.txt
+_antidote=~/.antidote
 
-#How to add zsh-syntax-highlighting see https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
-source ~/dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -e $_zsh_plugins ]] || touch "$_zsh_plugins"
+
+if ! [[ -e $_antidote ]]; then
+  git clone --depth=1 https://github.com/mattmc3/antidote.git "$_antidote"
+  # git clone --depth=1 git@github.com:mattmc3/antidote.git "$_antidote"
+fi
+
+source "$_antidote"/antidote.zsh
+antidote load
+
+#clean
+unset _zsh_plugins _antidote
 
 # zoxide, a smarter cd comand (also aliased)
 eval "$(zoxide init zsh)"
