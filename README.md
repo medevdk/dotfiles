@@ -29,3 +29,6 @@ reload
 
 CTRL-A + SHIFT I
 ```
+
+#### Next
+https://github.com/medevdk/.config
