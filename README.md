@@ -3,17 +3,9 @@
 ```
 cd ~
 git clone https://github.com/medevdk/dotfiles.git
-```
 
-Get _zsh_ up and running (not using a plugin manager)
 
-```
-cd ~/dotfiles/zsh/
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-git clone https://github.com/zsh-users/zsh-autosuggestions.git
-```
-
-Get _tmux_ up and running
+Get _tmux plugins_ up and running
 
 ```
 cd ~/dotfiles/.tmux
@@ -24,6 +16,7 @@ Symlink
 
 ```
 cd ~/dotfiles
+
 stow zsh
 stow .tmux
 stow vim
