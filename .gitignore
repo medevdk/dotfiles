@@ -6,6 +6,7 @@
 
 !zsh/
 !zsh/.zshrc
+!zsh/.zsh_plugins.txt
 
 !vim/
 !vim/.vimrc
