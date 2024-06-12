@@ -3,16 +3,16 @@
 ```
 cd ~
 git clone https://github.com/medevdk/dotfiles.git
+```
 
-
-Get _tmux plugins_ up and running
+#### Get _tmux plugins_ up and running
 
 ```
 cd ~/dotfiles/.tmux
 git clone https://github.com/tmux-plugins/tpm ~/dotfiles/.tmux/plugins/tpm
 ```
 
-Symlink
+#### Symlink
 
 ```
 cd ~/dotfiles
@@ -22,7 +22,7 @@ stow .tmux
 stow vim
 ```
 
-In the terminal
+#### In the terminal
 
 ```
 reload
