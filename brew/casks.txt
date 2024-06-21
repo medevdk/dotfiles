@@ -1,0 +1,14 @@
+appcleaner
+firefox
+font-hack-nerd-font
+font-sf-pro
+gimp
+iterm2
+miniforge
+postman
+rectangle
+sf-symbols
+sigil
+visual-studio-code
+vlc
+wezterm
