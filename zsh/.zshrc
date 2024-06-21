@@ -59,6 +59,8 @@ alias cat="bat"
 #ping only 5 times
 alias ping="ping -c 5"
 
+alias weather="ansiweather"
+
 #in Linux set MacOs as startup disk at next boot
 #in MacOs set boot volume in Settings -> General -> Startup Disk
 alias macos="sudo asahi-bless --set-boot 1 --next"
