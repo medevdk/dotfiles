@@ -14,3 +14,7 @@
 !.tmux
 !.tmux/.tmux.conf
 
+!brew
+!brew/leaves.txt
+!brew/casks.txt
+
