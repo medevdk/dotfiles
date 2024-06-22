@@ -3,11 +3,20 @@
 #Change ESC to jk
 bindkey -M viins 'jk' vi-cmd-mode
 
-#my prompt (back to normal)
+# Left prompt
 # PS1='%F{110} %2~ '$'\n''%F{110} '$'\U27a4'' '
 PS1='%F{47} %2~ '$'\n''%F{46} '$'\U27a4 '' '
 #add empty line before prompt
 precmd() { print "" }
+
+#Right prompt show the git branch when in git repo
+#Found in in the git book
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+RPROMPT='${vcs_info_msg_0_}'
+zstyle ':vcs_info:git:*' formats '%b'
 
 
 #HISTORY
