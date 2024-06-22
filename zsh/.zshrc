@@ -18,6 +18,9 @@ setopt prompt_subst
 RPROMPT='${vcs_info_msg_0_}'
 zstyle ':vcs_info:git:*' formats '%b'
 
+#Tab completion
+autoload -Uz compinit && compinit
+
 
 #HISTORY
 HISTFILE=$HOME/dotfiles/zsh/.zsh_history
