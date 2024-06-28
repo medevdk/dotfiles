@@ -140,6 +140,8 @@ export PATH=/opt/homebrew/sbin:$PATH
 
 export PATH=/home/devdk/.cargo/bin:$PATH
 
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 #just for funs
 fortune | cowsay -n | lolcat
 
