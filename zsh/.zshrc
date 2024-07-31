@@ -46,8 +46,8 @@ alias reload='source $HOME/.zshrc'
 #pretty print echo $PATH
 alias path="echo $PATH | tr ':' '\n'"
 
-alias ls=" ls -l --color=auto"
-alias lsa=" ls -al"
+alias ls=" ls -ltrh --color=auto"
+alias lsa=" ls -alh"
 #list only dotfiles
 alias lsd=' ls -d .*'
 
@@ -82,6 +82,16 @@ alias wget="wget --wait=2 --level=inf --limit-rate=200K --recursive --page-requi
 
 #Start or attach to a tmux session called TMUX
 alias tat="tmux attach -t TMUX || tmux new -s TMUX"
+
+#yazi cli file manager
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
 #increase volume of media
 function upvolume() {
@@ -140,7 +150,11 @@ export PATH=/opt/homebrew/sbin:$PATH
 
 export PATH=/home/devdk/.cargo/bin:$PATH
 
+#view manpaged with bat in catttpuccin theme
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+#neovim as editor
+export EDITOR=nvim
 
 #just for funs
 fortune | cowsay -n | lolcat
@@ -167,3 +181,19 @@ unset _zsh_plugins _antidote
 
 # 'source' zoxide, a smarter cd comand (also aliased)
 eval "$(zoxide init zsh)"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
