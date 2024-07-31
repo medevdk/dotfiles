@@ -83,6 +83,16 @@ alias wget="wget --wait=2 --level=inf --limit-rate=200K --recursive --page-requi
 #Start or attach to a tmux session called TMUX
 alias tat="tmux attach -t TMUX || tmux new -s TMUX"
 
+#yazi use yy to change current working directory when exit yazi
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
 #increase volume of media
 function upvolume() {
      readonly input=${1:?"Input File must be specified"}
