@@ -150,7 +150,10 @@ export PATH=/opt/homebrew/sbin:$PATH
 
 export PATH=/home/devdk/.cargo/bin:$PATH
 
+#Colored man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+#Avoid weird formatted man pages with above coloring by 'bat'
+export MANROFFOPT="-c"
 
 #just for funs
 fortune | cowsay -n | lolcat
