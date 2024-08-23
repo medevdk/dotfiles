@@ -1,6 +1,6 @@
 #https://zsh.sourceforge.io/Doc/Release/Options.html
 
-#Change ESC to jk
+#map ESC to jk
 bindkey -M viins 'jk' vi-cmd-mode
 
 # Left prompt
@@ -9,8 +9,7 @@ PS1='%F{47} %3~ '$'\n''%F{46} '$'\U27a4 '' '
 #add empty line before prompt
 precmd() { print "" }
 
-#Right prompt show the git branch when in git repo
-#Found in in the git book
+#Right prompt show the git branch when in git repo. Found in in the git book
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
@@ -20,7 +19,6 @@ zstyle ':vcs_info:git:*' formats '%b'
 
 #Tab completion
 autoload -Uz compinit && compinit
-
 
 #HISTORY
 HISTFILE=$HOME/dotfiles/zsh/.zsh_history
@@ -36,13 +34,14 @@ setopt completealiases      #complete aliases
 setopt correct              #spelling correction for commands
 
 #Misc
-setopt auto_cd	#cd by typing directory name if it is not a command (e.g. go will not work)
+# setopt auto_cd	#cd by typing directory name if it is not a command (e.g. go will not work)
 
 #ALIAS 
 alias cls=' clear'
 
 #source this file
 alias reload='source $HOME/.zshrc'
+
 #pretty print echo $PATH
 alias path="echo $PATH | tr ':' '\n'"
 
@@ -56,8 +55,8 @@ alias cd=" z"
 
 alias cd..=" cd .."
 alias ..=' cd ..'
-alias mkdir='mkdir -p'
 
+alias mkdir='mkdir -p'
 alias cp="cp -i -R"
 alias mv="mv -i"
 alias rm="rm -R"
@@ -73,11 +72,11 @@ alias ping="ping -c 5"
 
 alias weather="ansiweather"
 
-#in Linux set MacOs as startup disk at next boot
-#in MacOs set boot volume in Settings -> General -> Startup Disk
+#in Asahi set MacOs as startup disk at next boot
+#(in MacOs set boot volume in Settings -> General -> Startup Disk)
 alias macos="sudo asahi-bless --set-boot 1 --next"
 
-#download all website, e.g. wget https://www.google.com
+#scrape website, e.g. wget https://www.google.com. If nothing else works, it is slow.
 alias wget="wget --wait=2 --level=inf --limit-rate=200K --recursive --page-requisites --user-agent=Mozilla --no-parent --convert-links --adjust-extension --no-clobber -e robots=off "
 
 #Start or attach to a tmux session called TMUX
@@ -102,6 +101,7 @@ function upvolume() {
 
      command ffmpeg -i "$input" -filter:a "volume=1.5" "$output"
 }
+
 #convert to mp4
 function 2mp4() {
   readonly input=${1:?"Input File must be specified"}
@@ -145,15 +145,20 @@ export PATH="/usr/local/sbin:$PATH"
 #Godoc path
 export PATH="$HOME/Develop/go/bin:$PATH"
 
+#Mac Silicon
 export PATH=/opt/homebrew/bin:$PATH
 export PATH=/opt/homebrew/sbin:$PATH
 
+#Rust
 export PATH=/home/devdk/.cargo/bin:$PATH
 
 #Colored man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 #Avoid weird formatted man pages with above coloring by 'bat'
 export MANROFFOPT="-c"
+
+#privatized zoxide
+export _ZO_EXCLUDE_DIRS="/Volumes/*"
 
 #just for funs
 fortune | cowsay -n | lolcat
