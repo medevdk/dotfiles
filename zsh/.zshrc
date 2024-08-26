@@ -4,7 +4,6 @@
 bindkey -M viins 'jk' vi-cmd-mode
 
 # Left prompt
-# PS1='%F{110} %2~ '$'\n''%F{110} '$'\U27a4'' '
 PS1='%F{47} %3~ '$'\n''%F{46} '$'\U27a4 '' '
 #add empty line before prompt
 precmd() { print "" }
@@ -33,9 +32,6 @@ setopt share_history
 setopt completealiases      #complete aliases
 setopt correct              #spelling correction for commands
 
-#Misc
-# setopt auto_cd	#cd by typing directory name if it is not a command (e.g. go will not work)
-
 #ALIAS 
 alias cls=' clear'
 
@@ -61,6 +57,7 @@ alias cp="cp -i -R"
 alias mv="mv -i"
 alias rm="rm -R"
 alias rsync="rsync -av"
+alias tree="tree -C"
 
 #find dotfiles -H and gitignired -I too
 alias fd-"fd -H -I"
@@ -183,5 +180,5 @@ antidote load
 #clean
 unset _zsh_plugins _antidote
 
-# 'source' zoxide, a smarter cd comand (also aliased)
+# 'source' zoxide, a smarter cd comand
 eval "$(zoxide init zsh)"
