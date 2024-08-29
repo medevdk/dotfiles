@@ -59,7 +59,7 @@ alias rm="rm -R"
 alias rsync="rsync -av"
 alias tree="tree -C"
 
-#find dotfiles -H and gitignired -I too
+#find dotfiles -H and gitignored -I too
 alias fd-"fd -H -I"
 
 #cat with color
