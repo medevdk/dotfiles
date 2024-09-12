@@ -67,6 +67,9 @@ alias cat="bat"
 #ping only 5 times
 alias ping="ping -c 5"
 
+#open zathura in full screen
+alias zathura="zathura --mode fullscreen"
+
 alias weather="ansiweather"
 
 #in Asahi set MacOs as startup disk at next boot
