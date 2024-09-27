@@ -82,6 +82,10 @@ alias wget="wget --wait=2 --level=inf --limit-rate=200K --recursive --page-requi
 #Start or attach to a tmux session called TMUX
 alias tat="tmux attach -t TMUX || tmux new -s TMUX"
 
+#flatpak alias
+#localsend
+alias localsend="flatpak run org.localsend.localsend_app"
+
 #yazi use yy to change current working directory when exit yazi
 function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
