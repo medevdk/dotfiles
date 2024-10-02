@@ -4,6 +4,8 @@
 #But allow
 !.gitignore
 
+!.stow.MD
+
 !zsh/
 !zsh/.zshrc
 !zsh/.zsh_plugins.txt
