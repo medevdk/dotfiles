@@ -2,6 +2,8 @@
 
 #map ESC to jk
 bindkey -M viins 'jk' vi-cmd-mode
+#using jefferytse/zsh-vi-mode plugin
+ZVM_VI_ESCAPE_BINDKEY=jk
 
 # Left prompt
 PS1='%F{47} %3~ '$'\n''%F{46} '$'\U27a4 '' '
