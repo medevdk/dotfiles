@@ -1,9 +1,9 @@
 [manager]
 ratio = [1,3,3]
 # show_hidden = true
-sort_by = "size"
+# sort_by = "size"
 sort_sensitive = false
-sort_reverse=true
+# sort_reverse=true
 linemode = "size"
 
 [preview]
