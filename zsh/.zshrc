@@ -43,10 +43,10 @@ alias reload='source $HOME/.zshrc'
 #pretty print echo $PATH
 alias path="echo $PATH | tr ':' '\n'"
 
-alias ls=" ls -l --color=auto"
-alias lsa=" ls -al"
+alias ls=" ls -lh --color=auto"
+alias lsa=" ls -alh"
 #list only dotfiles
-alias lsd=' ls -d .*'
+alias lsd=' ls -dh .*'
 
 #use zoxide for cd
 alias cd=" z"
