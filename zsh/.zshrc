@@ -98,6 +98,12 @@ function yy() {
 	rm -f -- "$tmp"
 }
 
+#Set the keyboard backlight by value (use in Sway)
+function backlight() {
+  readonly input=${1:?"Value missing 0...255"}
+  brightnessctl --device=kbd_backlight set "$1"
+}
+
 #increase volume of media
 function upvolume() {
      readonly input=${1:?"Input File must be specified"}
