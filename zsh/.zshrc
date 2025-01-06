@@ -38,7 +38,7 @@ setopt correct              #spelling correction for commands
 alias cls=' clear'
 
 #source this file
-alias reload='source $HOME/.zshrc'
+alias reload='cls; source $HOME/.zshrc'
 
 #pretty print echo $PATH
 alias path="echo $PATH | tr ':' '\n'"
