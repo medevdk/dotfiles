@@ -88,6 +88,9 @@ alias tat="tmux attach -t TMUX || tmux new -s TMUX"
 #localsend
 alias localsend="flatpak run org.localsend.localsend_app"
 
+#listen radio 538 in the cli
+alias 538="mpv https://www.mp3streams.nl/zender/radio-538/stream/4-mp3-128"
+
 #yazi use yy to change current working directory when exit yazi
 function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
