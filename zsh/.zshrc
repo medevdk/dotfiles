@@ -198,6 +198,11 @@ antidote load
 #clean
 unset _zsh_plugins _antidote
 
+# Autosuggest settings https://scottspence.com/posts/my-updated-zsh-config-2025
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#663399,standout"
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+
 # 'source' zoxide, a smarter cd comand
 eval "$(zoxide init zsh)"
 
