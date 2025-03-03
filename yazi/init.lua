@@ -1,3 +1,3 @@
-require("full-border"):setup {
-  type = ui.Border.Rounded,
+require("full-border"):setup{
+  type=ui.Border.ROUNDED,
 }
