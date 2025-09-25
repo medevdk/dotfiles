@@ -160,6 +160,9 @@ export PATH="/usr/local/sbin:$PATH"
 #Godoc path
 export PATH="$HOME/Develop/go/bin:$PATH"
 
+#Go templ 
+export PATH="$HOME/go/bin/templ:$PATH"
+
 #Mac Silicon
 export PATH=/opt/homebrew/bin:$PATH
 export PATH=/opt/homebrew/sbin:$PATH
