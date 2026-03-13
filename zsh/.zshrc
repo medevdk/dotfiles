@@ -57,7 +57,7 @@ alias ..=' cd ..'
 alias mkdir='mkdir -p'
 alias cp="cp -i -R"
 alias mv="mv -i"
-alias rm="rm -R"
+alias rm="rm -iR"
 alias rsync="rsync -av"
 alias tree="tree -C"
 
@@ -84,12 +84,17 @@ alias wget="wget --wait=2 --level=inf --limit-rate=200K --recursive --page-requi
 #Start or attach to a tmux session called TMUX
 alias tat="tmux attach -t TMUX || tmux new -s TMUX"
 
+#open go webserver on iphone with safari
+alias qr='qrencode -o /tmp/qr.png -s 10 "http://$(ipconfig getifaddr en0):3060" && open -a Safari /tmp/qr.png' 
+
 #flatpak alias
 #localsend
 alias localsend="flatpak run org.localsend.localsend_app"
 
 #listen radio 538 in the cli
 alias 538="mpv https://www.mp3streams.nl/zender/radio-538/stream/4-mp3-128"
+
+alias air="$HOME/go/bin/air"
 
 #yazi use yy to change current working directory when exit yazi
 function yy() {
@@ -157,8 +162,17 @@ timezsh() {
 
 export PATH="/usr/local/sbin:$PATH"
 
+#Go install path
+# export PATH="$PATH:$(go env GOBIN)"
+# export GOPATH=$(go env GOPATH)
+export GOPATH="$HOME/go"
+export PATH="$PATH:$HOME/go/bin"
+
+#Mason path (run Mason installed tools in terminal)
+export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
+
 #Godoc path
-export PATH="$HOME/Develop/go/bin:$PATH"
+# export PATH="$HOME/Develop/go/bin:$PATH"
 
 #Go templ 
 export PATH="$HOME/go/bin/templ:$PATH"
@@ -168,7 +182,8 @@ export PATH=/opt/homebrew/bin:$PATH
 export PATH=/opt/homebrew/sbin:$PATH
 
 #Rust
-export PATH=/home/devdk/.cargo/bin:$PATH
+# export PATH=/home/devdk/.cargo/bin:$PATH
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 #Colored man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -179,7 +194,7 @@ export MANROFFOPT="-c"
 export _ZO_EXCLUDE_DIRS="/Volumes/*"
 
 #just for funs
-fortune | cowsay -n | lolcat
+[[ $- == *i* ]] && fortune | cowsay -n | lolcat
 
 #
 # Plugins
@@ -208,19 +223,4 @@ ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # 'source' zoxide, a smarter cd comand
 eval "$(zoxide init zsh)"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
