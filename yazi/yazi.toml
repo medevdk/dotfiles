@@ -22,3 +22,12 @@ play = [
 prepend_rules = [
 {name = "*.html", use = ["open", "edit"]},
 ]
+
+[plugin]
+prepend_previewers = [
+{ name = "*.epub", run = "epub" }
+]
+
+prepend-preloaders = [
+{ name = "*.epub", run = "epub" }
+]
