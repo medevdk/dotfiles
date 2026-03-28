@@ -181,6 +181,8 @@ export PATH="$HOME/go/bin/templ:$PATH"
 #Mac Silicon
 export PATH=/opt/homebrew/bin:$PATH
 export PATH=/opt/homebrew/sbin:$PATH
+#Force homebrew sqlite
+export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 
 #Rust
 # export PATH=/home/devdk/.cargo/bin:$PATH
