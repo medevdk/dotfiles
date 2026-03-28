@@ -6,7 +6,7 @@ bindkey -M viins 'jk' vi-cmd-mode
 ZVM_VI_ESCAPE_BINDKEY=jk
 
 # Left prompt
-PS1='%F{47} %3~ '$'\n''%F{46} '$'\U27a4 '' '
+PS1='%F{196} %3~ '$'\n''%F{160} '$'\U27a4 '' '
 #add empty line before prompt
 precmd() { print "" }
 
@@ -83,8 +83,10 @@ alias wget="wget --wait=2 --level=inf --limit-rate=200K --recursive --page-requi
 
 #Start or attach to a tmux session called TMUX
 alias tat="tmux attach -t TMUX || tmux new -s TMUX"
-alias push-to-pi="rsync -av --delete --exclude='.git' --exclude='nvim' --exclude='.tmux' --exclude='mac' --exclude='linux' --exclude='.DS_Store' ~/dotfiles/ pi:~/dotfiles/"
-alias pull-from-pi="rsync -av --delete --exclude='.git' pi:~/dotfiles/ ~/dotfiles/pi/"
+
+alias push-to-pi="rsync -av --delete ~/dotfiles/ pi:~/dotfiles/"
+alias pull-from-pi="rsync -av --delete pi:~/dotfiles/ ~/dotfiles"
+
 
 #open go webserver on iphone, scan the qr code
 #qr will open hardcoded port 3060; or qr portnumber (e.g. qr 4000)

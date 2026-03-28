@@ -1,0 +1,47 @@
+# Ignore all
+*
+
+# But allow
+!.gitignore
+!README.md
+!stow.md
+
+# Git
+!git/
+!git/.gitconfig
+
+# SSH
+!ssh/
+!ssh/.ssh/
+!ssh/.ssh/config
+
+# Zsh
+!zsh/
+!zsh/.zshrc
+!zsh/.zsh_plugins.txt
+
+# Vim
+!vim/
+!vim/.vimrc
+
+# Tmux
+!.tmux/
+!.tmux/.tmux.conf
+
+# Neofetch
+!neofetch/
+!neofetch/.config/
+!neofetch/.config/neofetch/
+!neofetch/.config/neofetch/**
+
+# Yazi
+!yazi/
+!yazi/.config/
+!yazi/.config/yazi/
+!yazi/.config/yazi/**
+
+# Nvim (Pi specific - to be added)
+!nvim/
+!nvim/.config/
+!nvim/.config/nvim/
+!nvim/.config/nvim/**

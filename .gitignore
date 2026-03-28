@@ -91,5 +91,21 @@ yazi/plugins/.DS_Store
 !linux/.config/foot/
 !linux/.config/foot/**
 
+# Pi specific
+!pi/
+!pi/.gitignore
+!pi/.tmux/
+!pi/.tmux/.tmux.conf
+!pi/nvim/
+!pi/nvim/.config/
+!pi/nvim/.config/nvim/
+!pi/nvim/.config/nvim/**
+!pi/ssh/
+!pi/ssh/.ssh/
+!pi/ssh/.ssh/config
+!pi/zsh/
+!pi/zsh/.zshrc
+!pi/zsh/.zsh_plugins.txt
+
 # Global DS_Store exclusion
 **/.DS_Store
