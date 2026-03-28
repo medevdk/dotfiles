@@ -1,0 +1,11 @@
+location:Davao,PH
+ansi:true
+units:metric
+forecast:0
+show_uvi:false
+show_daylight:true
+dateformat:%A %d %b
+timeformat:%d %b %R
+
+#Text and Colors
+background:\033[40m
