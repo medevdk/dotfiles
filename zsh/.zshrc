@@ -84,6 +84,10 @@ alias wget="wget --wait=2 --level=inf --limit-rate=200K --recursive --page-requi
 #Start or attach to a tmux session called TMUX
 alias tat="tmux attach -t TMUX || tmux new -s TMUX"
 
+alias push-to-pi="rsync -av --delete ~/dotfiles/ pi:~/dotfiles/"
+alias pull-from-pi="rsync -av --delete pi:~/dotfiles/ ~/dotfiles"
+
+
 #open go webserver on iphone, scan the qr code
 #qr will open hardcoded port 3060; or qr portnumber (e.g. qr 4000)
 alias qr='_qr() { local port="${1:-3060}"; qrencode -o /tmp/qr.png -s 10 "http://$(ipconfig getifaddr en0):${port}" && open -a Safari /tmp/qr.png; }; _qr'
