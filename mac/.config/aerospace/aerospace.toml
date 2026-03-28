@@ -1,0 +1,109 @@
+ # Reference: https://github.com/i3/i3/blob/next/etc/config
+
+# i3 doesn't have "normalizations" feature that why we disable them here.
+# But the feature is very helpful.
+# Normalizations eliminate all sorts of weird tree configurations that don't make sense.
+# Give normalizations a chance and enable them back.
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# Mouse follows focus when focused monitor changes
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+#start aerospace at login
+start-at-login = true
+
+[gaps]
+inner.horizontal = 2
+inner.vertical = 2
+outer.left = 0
+outer.bottom = 0
+outer.top = 0
+outer.right = 2
+
+[mode.main.binding]
+
+    # i3 wraps focus by default
+    alt-j =         'focus --boundaries-action wrap-around-the-workspace left'
+    alt-k =         'focus --boundaries-action wrap-around-the-workspace down'
+    alt-l =         'focus --boundaries-action wrap-around-the-workspace up'
+    alt-semicolon = 'focus --boundaries-action wrap-around-the-workspace right'
+
+    alt-shift-j = 'move left'
+    alt-shift-k = 'move down'
+    alt-shift-l = 'move up'
+    alt-shift-semicolon = 'move right'
+
+    # Consider using 'join-with' command as a 'split' replacement if you want to enable
+    # normalizations
+    # alt-h = 'split horizontal'
+    # alt-v = 'split vertical'
+
+    alt-f = 'fullscreen'
+
+    alt-s = 'layout v_accordion' # 'layout stacking' in i3
+    alt-w = 'layout h_accordion' # 'layout tabbed' in i3
+    alt-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
+
+    alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
+
+    # See: https://nikitabobko.github.io/AeroSpace/guide#floating-windows
+    #alt-space = 'focus toggle_tiling_floating'
+
+    # `focus parent`/`focus child` are not yet supported, and it's not clear whether they
+    # should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
+    # alt-a = 'focus parent'
+
+    cmd-1 = 'workspace 1'
+    cmd-2 = 'workspace 2'
+    cmd-3 = 'workspace 3'
+    cmd-4 = 'workspace 4'
+    cmd-5 = 'workspace 5'
+    cmd-6 = 'workspace 6'
+    cmd-7 = 'workspace 7'
+    cmd-8 = 'workspace 8'
+    cmd-9 = 'workspace 9'
+
+    cmd-shift-1 = 'move-node-to-workspace 1'
+    cmd-shift-2 = 'move-node-to-workspace 2'
+    cmd-shift-3 = 'move-node-to-workspace 3'
+    cmd-shift-4 = 'move-node-to-workspace 4'
+    cmd-shift-5 = 'move-node-to-workspace 5'
+    cmd-shift-6 = 'move-node-to-workspace 6'
+    cmd-shift-7 = 'move-node-to-workspace 7'
+    cmd-shift-8 = 'move-node-to-workspace 8'
+    cmd-shift-9 = 'move-node-to-workspace 9'
+
+    ctrl-shift-c = 'reload-config'
+
+    alt-r = 'mode resize'
+
+    cmd-enter = 'exec-and-forget open -n -a WezTerm.app'
+
+[[on-window-detected]]
+  #Open Finder floating and center it
+  if.app-id = 'com.apple.finder'
+  run = [ 'layout floating', 'exec-and-forget ~/.config/aerospace/center.sh']
+[[on-window-detected]]
+  #Set Firefox History floating
+  if.app-id = 'org.mozilla.firefox'
+  if.window-title-regex-substring = 'Library'
+  run = [ 'layout floating' ]
+[[on-window-detected]]
+  if.app-id = 'org.mozilla-firefox'
+  if.window-title-regex-substring = 'Developer Tools'
+  run = [ 'layout floating']
+[[on-window-detected]]
+ # Float Chrome file picker / open dialogs
+  if.app-id = 'com.google.Chrome'
+  if.window-title-regex-substring = 'Finder window'
+  run = ['layout floating', 'exec-and-forget ~/.config/aerospace/center.sh']
+
+
+[mode.resize.binding]
+    h = 'resize width -50'
+    j = 'resize height +50'
+    k = 'resize height -50'
+    l = 'resize width +50'
+    enter = 'mode main'
+    esc = 'mode main'

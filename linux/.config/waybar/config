@@ -1,0 +1,190 @@
+
+{
+    // -------------------------------------------------------------------------
+    // Global configuration
+    // -------------------------------------------------------------------------
+
+    "layer": "top",
+    "position": "top",
+    "height": 40,
+
+    "modules-left": [
+          "clock#date",
+          "clock#time"
+    ],
+    "modules-center": [
+        "sway/workspaces"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "tray",
+        "bluetooth",
+        "battery",
+        "custom/power"
+    ],
+
+
+    // -------------------------------------------------------------------------
+    // Modules
+    // -------------------------------------------------------------------------
+
+    "custom/power": {
+        "format": "{}",
+        "exec": "echo ; echo  logout",
+        "on-click":"wlogout -b 2",
+        "interval" : 86400, // once every day
+        "tooltip": true
+      },
+
+    "battery": {
+        "interval": 10,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        // Connected to AC
+        "format": " {icon}   {capacity}%", // Icon: bolt
+        // Not connected to AC
+        "format-discharging": "{icon}   {capacity}%",
+        "format-icons": [
+            "", // Icon: battery-full
+            "", // Icon: battery-three-quarters
+            "", // Icon: battery-half
+            "", // Icon: battery-quarter
+            ""  // Icon: battery-empty
+        ],
+        "tooltip": true
+    },
+
+    "bluetooth": {
+      //"format-alt":"bluetooth: {status}",
+      "format-on":"",
+      "format-off":"󰂲",
+      "format-disabled": "",
+      "format-connected":"󰂱 {num_connections}",
+      "tooltip-format-connected": "{device_enumerate}",
+      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+      //"on-click":"foot bluetoothctl",
+      //"tooltip-format":"{status}"
+    },
+
+    "clock#time": {
+        "interval": 1,
+        "format": "{:%H:%M}",
+        "tooltip": false
+    },
+
+    "clock#date": {
+      "interval": 10,
+      "format": "{:%e %b %Y}",
+//      "format": "  {:%e %b %Y}", // Icon: calendar-alt
+      "tooltip":false
+//      "tooltip-format": "{:%e %B %Y}"
+    },
+
+    "cpu": {
+        "interval": 5,
+        "format": "  {usage}% ({load})", // Icon: microchip
+        "states": {
+          "warning": 70,
+          "critical": 90
+        }
+    },
+
+    /* "custom/keyboard-layout": { */
+    /*   "exec": "swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name' | cut -d '\"' -f4", */
+    /*   // Interval set only as a fallback, as the value is updated by signal */
+    /*   "interval": 30, */
+    /*   "format": "  {}", // Icon: keyboard */
+    /*   // Signal sent by Sway key binding (~/.config/sway/key-bindings) */
+    /*   "signal": 1, // SIGHUP */
+    /*   "tooltip": false */
+    /* }, */
+
+    "memory": {
+        "interval": 5,
+        "format": "  {}%", // Icon: memory
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
+
+    "network": {
+        "interval": 5,
+//        "format-wifi": "   {essid} ({signalStrength}%)", // Icon: wifi
+        "format-wifi": "   {essid} ", // Icon: wifi
+        
+        "format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
+        "format-disconnected": "⚠  Disconnected",
+        "tooltip":false
+//        "tooltip-format": "{ifname}: {ipaddr}"
+    },
+
+    "sway/mode": {
+        "format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
+        "tooltip": false
+    },
+
+    "sway/window": {
+        "format": "{}",
+        "max-length": 120
+    },
+
+    "sway/workspaces": {
+        "all-outputs": true,
+        "format": "{icon}",
+        "disable-scroll": true,
+//        "format": "{icon} {name}",
+//        "format-icons": {
+//            "1:www": "龜", // Icon: firefox-browser
+//            "2:mail": "", // Icon: mail
+//            "3:editor": "", // Icon: code
+//            "4:terminals": "", // Icon: terminal
+//            "5:portal": "", // Icon: terminal
+//            "urgent": "",
+//            "focused": "",
+//            "default": ""
+//        }
+    },
+
+    "pulseaudio": {
+    //    //"scroll-step": 1,
+        "format":"{icon}  {volume}%",
+        "format":"\uf027  {volume}%",
+        "format-bluetooth": "{icon}  {volume}%",
+          "format-muted":"\uf6a9",
+          "max-volume":100,
+    //    "format-icons": {
+    //        "headphones": "",
+    //        "handsfree": "",
+    //        "headset": "",
+    //        "phone": "",
+    //        "portable": "",
+    //        "car": "",
+    //        "default": ["", ""]
+    //    },
+    //    "on-click": "pavucontrol"
+    },
+
+    "temperature": {
+      "critical-threshold": 80,
+      "interval": 5,
+      "format": "{icon}  {temperatureC}°C",
+      "format-icons": [
+          "", // Icon: temperature-empty
+          "", // Icon: temperature-quarter
+          "", // Icon: temperature-half
+          "", // Icon: temperature-three-quarters
+          ""  // Icon: temperature-full
+      ],
+      "tooltip": true
+    },
+
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+    }
+
+}

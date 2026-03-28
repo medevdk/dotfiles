@@ -1,0 +1,9 @@
+width=40%
+prompt=
+show=drun
+allow_images=true
+image_size=24
+hide_scroll=true
+lines=10
+gtk_dark=true
+no_actions=true

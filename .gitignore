@@ -2,6 +2,8 @@
 *
 
 # But allow
+
+# Shared config
 !.gitignore
 !stow.md
 !README.md
@@ -51,13 +53,43 @@
 !config/.config/wezterm/**
 !config/.config/yt-dlp/
 !config/.config/yt-dlp/**
-
+!config/.config/fish/
+!config/.config/fish/**
+!config/.config/gh/
+!config/.config/gh/**
 # Yazi
+
 !yazi/
 !yazi/**
 yazi/.DS_Store
 yazi/flavors/.DS_Store
 yazi/plugins/.DS_Store
+
+# Mac specific
+!mac/
+!mac/.config/
+!mac/.config/aerospace/
+!mac/.config/aerospace/**
+!mac/.config/iterm2/
+!mac/.config/iterm2/**
+!mac/.config/sketchybar/
+!mac/.config/sketchybar/**
+
+# Linux specific
+!linux/
+!linux/.config/
+!linux/.config/sway/
+!linux/.config/sway/**
+!linux/.config/waybar/
+!linux/.config/waybar/**
+!linux/.config/wlogout/
+!linux/.config/wlogout/**
+!linux/.config/wofi/
+!linux/.config/wofi/**
+!linux/.config/zathura/
+!linux/.config/zathura/**
+!linux/.config/foot/
+!linux/.config/foot/**
 
 # Global DS_Store exclusion
 **/.DS_Store
