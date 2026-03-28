@@ -1,0 +1,40 @@
+--- Keybinding Cheatsheet ---
+
+--- Surround (mini.surround) ---
+saiw)       : Add surround inner word with )
+sd'         : Delete surrounding '
+sr)'        : Replace surrounding ) with '
+sf / sF     : Find surrounding
+sh          : Highlight surrounding
+
+--- Zettelkasten ---
+<leader>zw  : Capture - Write a new note
+<leader>zb  : Browse - Find a note by name
+<leader>zl  : Insert a [[link]] to another note
+<leader>zd  : Discover - Find all notes with word under the cursor
+<leader>zf  : Follow the [[link]]
+<leader>zr  : Rename the [[link]]
+
+--- Quickfix List ---
+<leader>xd  : Send all to qf list
+[q and ]q   : move forward / backward
+<leader>xl  : Open gf list
+<leader>xc  : Close qf list
+
+--- Go & Templ ---
+<leader>tr : Templ generate & air
+<leader>tf : Templ format
+<leader>go : Go run main.go
+
+--- Frontend ---
+<leader>tw : Tailwind compile
+<leader>rf : Refresh browser
+
+--- General ---
+<leader>ff  : Find files (Telescope)
+<leader>fg  : Live grep
+<leader>ft  : Find ToDo's
+[t ]t       : move forward / backward
+
+<leader>ec  : Edit this cheatsheet
+q / <Esc>   : Close

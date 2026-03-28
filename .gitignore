@@ -2,8 +2,6 @@
 *
 
 # But allow
-
-# Shared config
 !.gitignore
 !stow.md
 !README.md
@@ -26,39 +24,34 @@
 !.tmux/
 !.tmux/.tmux.conf
 
-# Brew
-!brew/
-!brew/leaves.txt
-!brew/casks.txt
-
 # SSH
 !ssh/
 !ssh/.ssh/
 !ssh/.ssh/config
 
-# Config directory
-!config/
-!config/.config/
-!config/.config/mpv/
-!config/.config/mpv/**
-!config/.config/bat/
-!config/.config/bat/**
-!config/.config/cmus/
-!config/.config/cmus/**
-!config/.config/neofetch/
-!config/.config/neofetch/**
-!config/.config/nvim/
-!config/.config/nvim/**
-!config/.config/wezterm/
-!config/.config/wezterm/**
-!config/.config/yt-dlp/
-!config/.config/yt-dlp/**
-!config/.config/fish/
-!config/.config/fish/**
-!config/.config/gh/
-!config/.config/gh/**
-# Yazi
+# Shared config
+!shared/
+!shared/.config/
+!shared/.config/mpv/
+!shared/.config/mpv/**
+!shared/.config/bat/
+!shared/.config/bat/**
+!shared/.config/cmus/
+!shared/.config/cmus/**
+!shared/.config/neofetch/
+!shared/.config/neofetch/**
+!shared/.config/nvim/
+!shared/.config/nvim/**
+!shared/.config/wezterm/
+!shared/.config/wezterm/**
+!shared/.config/yt-dlp/
+!shared/.config/yt-dlp/**
+!shared/.config/fish/
+!shared/.config/fish/**
+!shared/.config/gh/
+!shared/.config/gh/**
 
+# Yazi (shared)
 !yazi/
 !yazi/**
 yazi/.DS_Store
@@ -74,6 +67,9 @@ yazi/plugins/.DS_Store
 !mac/.config/iterm2/**
 !mac/.config/sketchybar/
 !mac/.config/sketchybar/**
+!mac/brew/
+!mac/brew/leaves.txt
+!mac/brew/casks.txt
 
 # Linux specific
 !linux/

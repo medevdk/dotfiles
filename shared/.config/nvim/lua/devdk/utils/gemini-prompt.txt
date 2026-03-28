@@ -1,0 +1,7 @@
+"Hey Gemini, we are continuing work on my Neovim Zettelkasten for my GoTH stack
+development. We just finished the 'Clean Link' logic, where my filenames have
+timestamps (YYYYMMDDHHMM-title.md) but my links stay clean ( [[title]] ). The
+next step we discussed is a 'Rename' function. I need a way to rename a note's
+title that automatically finds and updates every [[link]] to that note across
+my entire Zettelkasten folder so that my connections never break. Can we code
+that into notes.lua?"

@@ -1,0 +1,10 @@
+{
+    "diagnostics.globals": [
+        "vim",
+        "noremap"
+    ],
+    "diagnostics.disable": [
+        "unused-local",
+        "undefined-global"
+    ]
+}
