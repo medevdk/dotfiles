@@ -33,6 +33,22 @@ stow ssh
 stow zsh
 ```
 
+### Raspberry Pi
+
+```bash
+cd ~/dotfiles
+stow git
+stow ssh
+stow zsh
+stow vim
+stow yazi
+stow neofetch
+stow nvim
+stow .tmux
+```
+
+> Synced from Mac via `push-to-pi` / `pull-from-pi` rsync aliases
+
 ### Tmux plugins
 
 ```bash
@@ -41,6 +57,8 @@ git clone https://github.com/tmux-plugins/tpm ~/dotfiles/.tmux/plugins/tpm
 ```
 
 Then in tmux: `CTRL-A + SHIFT I` to install plugins
+
+> **Note:** On the Pi, tmux plugins are installed manually due to network restrictions.
 
 ### Neovim
 
@@ -68,12 +86,20 @@ dotfiles/
   shared/     # symlinked on both macOS and Fedora
   mac/        # symlinked on macOS only
   linux/      # symlinked on Fedora only
+  pi/         # synced to Raspberry Pi via rsync
   git/        # .gitconfig, .gitignore_global
   ssh/        # ~/.ssh/config (keys are not stored)
   zsh/        # .zshrc, .zsh_plugins.txt
   vim/        # .vimrc
   .tmux/      # tmux config + plugins
   yazi/       # yazi file manager config
+```
+
+### Pi Sync (from Mac)
+
+```bash
+push-to-pi    # Mac → Pi
+pull-from-pi  # Pi → Mac
 ```
 
 ### SSH Keys
