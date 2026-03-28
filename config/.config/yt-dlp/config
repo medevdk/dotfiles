@@ -1,0 +1,2 @@
+#Save videos to ~/Youtube/
+-o ~/Youtube/%(title)s.%(ext)s

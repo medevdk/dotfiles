@@ -1,0 +1,36 @@
+wq
+seek 3600
+q
+add https://www.mp3streams.nl/zender/radio-538/stream/4-mp3-128
+add https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO538AAC.aac
+add https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO538.mp3
+help
+colorscheme
+quit
+exit
+pl-create tiesto
+save
+a
+colorscheme night
+colorscheme amazon
+colorscheme dracula
+pl-rename favs
+set status_display_program=cmus-status-display
+colorscheme spotify
+colorscheme zenburn
+colorscheme xterm-white
+colorscheme solarized-light
+colorscheme solarized-dark
+colorscheme jellybeans
+colorscheme gruvbox-warm
+colorscheme gruvbox-alt
+colorscheme gruvbox
+colorscheme green
+colorscheme green.
+colorscheme green-mono-88
+colorscheme gray-88
+colorscheme default
+colorscheme cyan
+set continue=true
+clear
+add ~/Music
