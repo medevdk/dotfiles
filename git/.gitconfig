@@ -1,0 +1,34 @@
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[user]
+	name = medevdk
+	email = 12559925+medevdk@users.noreply.github.com
+[color]
+	ui = auto
+[url "git@github.com:"]
+[core]
+	excludesfile = /Users/Michiel/.gitignore_global
+	editor = vim
+  autocrlf = input
+  pager = less -FRX
+[pull]
+  rebase = false
+[push]
+  autoSetupRemote = true
+[diff]
+  colorMoved = zebra
+[merge]
+  conflictsyle = diff3
+[safe]
+	directory = /usr/local/Homebrew
+[init]
+	defaultBranch = main
+[help]
+  autocorrect = 20
+[alias]
+  st = status
+  co = checkout
+  br = branch
+  lg = log --online --graph --decorate --all

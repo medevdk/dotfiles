@@ -1,0 +1,82 @@
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+Icon?
+
+# macOS Finder
+.DocumentRevisions-V100
+.fseventsd
+.Temporaryitems
+.VolumeIcon.icns
+
+# Neovim / Vim
+*.swp
+*.swo
+*.swn
+~*
+.netrwhist
+tags
+.vim/
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+/vendor/
+/dist/
+go.work
+go.work.sum
+
+# Go web app specific
+*.env
+.env.*
+!.env.example      # keep the example/template
+config.local.*
+secrets.*
+
+# Air (Go live reload tool)
+tmp/
+
+# Build output
+/bin/
+/build/
+/out/
+
+# Logs
+*.log
+logs/
+
+# Certificates & keys — important!
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# Terraform (common in Go backend projects)
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+
+# Docker
+.docker/
+
+# OS
+Thumbs.db
