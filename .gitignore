@@ -1,28 +1,63 @@
-#Ignore all
+# Ignore all
 *
 
-#But allow
+# But allow
 !.gitignore
-
 !stow.md
+!README.md
 
+# Git
+!git/
+!git/.gitconfig
+!git/.gitignore_global
+
+# Zsh
 !zsh/
 !zsh/.zshrc
 !zsh/.zsh_plugins.txt
 
+# Vim
 !vim/
 !vim/.vimrc
 
-!.tmux
+# Tmux
+!.tmux/
 !.tmux/.tmux.conf
 
-!brew
+# Brew
+!brew/
 !brew/leaves.txt
 !brew/casks.txt
 
-!yazi
+# SSH
+!ssh/
+!ssh/.ssh/
+!ssh/.ssh/config
+
+# Config directory
+!config/
+!config/.config/
+!config/.config/mpv/
+!config/.config/mpv/**
+!config/.config/bat/
+!config/.config/bat/**
+!config/.config/cmus/
+!config/.config/cmus/**
+!config/.config/neofetch/
+!config/.config/neofetch/**
+!config/.config/nvim/
+!config/.config/nvim/**
+!config/.config/wezterm/
+!config/.config/wezterm/**
+!config/.config/yt-dlp/
+!config/.config/yt-dlp/**
+
+# Yazi
+!yazi/
 !yazi/**
 yazi/.DS_Store
 yazi/flavors/.DS_Store
 yazi/plugins/.DS_Store
 
+# Global DS_Store exclusion
+**/.DS_Store
