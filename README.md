@@ -1,36 +1,36 @@
 ## My Dotfiles
 
+> Managed with [GNU Stow](https://www.gnu.org/software/stow/)
+
 ### Clone
 
 ```bash
 cd ~
-git clone https://github.com/medevdk/dotfiles.git
+git clone git@github.com:medevdk/dotfiles.git
+cd dotfiles
 ```
 
-### Stow everything
+### macOS
 
 ```bash
-cd ~/dotfiles
+stow shared
+stow mac
 stow git
 stow ssh
 stow zsh
 stow .tmux
 stow vim
-stow config
 stow yazi
 ```
 
-### Git
-
-Your `.gitconfig` and `.gitignore_global` are now managed here.
-
-### SSH
-
-Your `~/.ssh/config` is managed here. Keys are **not** stored — add them manually:
+### Fedora (Asahi Linux)
 
 ```bash
-ssh-keygen -t ed25519 -C "your_email@example.com"
-ssh-add ~/.ssh/id_ed25519
+stow shared
+stow linux
+stow git
+stow ssh
+stow zsh
 ```
 
 ### Tmux plugins
@@ -46,13 +46,13 @@ Then in tmux: `CTRL-A + SHIFT I` to install plugins
 
 Plugins are managed via lazy.nvim and install automatically on first launch.
 
-### Brew
+### Brew (macOS only)
 
-Restore packages:
+Restore packages after stowing:
 
 ```bash
-xargs brew install < ~/dotfiles/brew/leaves.txt
-xargs brew install --cask < ~/dotfiles/brew/casks.txt
+xargs brew install < ~/dotfiles/mac/brew/leaves.txt
+xargs brew install --cask < ~/dotfiles/mac/brew/casks.txt
 ```
 
 ### Reload shell
@@ -60,3 +60,29 @@ xargs brew install --cask < ~/dotfiles/brew/casks.txt
 ```bash
 reload
 ```
+
+### Structure
+
+```
+dotfiles/
+  shared/     # symlinked on both macOS and Fedora
+  mac/        # symlinked on macOS only
+  linux/      # symlinked on Fedora only
+  git/        # .gitconfig, .gitignore_global
+  ssh/        # ~/.ssh/config (keys are not stored)
+  zsh/        # .zshrc, .zsh_plugins.txt
+  vim/        # .vimrc
+  .tmux/      # tmux config + plugins
+  yazi/       # yazi file manager config
+```
+
+### SSH Keys
+
+Keys are **not** stored in this repo. Generate on each machine:
+
+```bash
+ssh-keygen -t ed25519 -C "your-description"
+ssh-add ~/.ssh/id_ed25519
+```
+
+Then add the public key to [GitHub](https://github.com/settings/keys).
