@@ -14,6 +14,8 @@
 # Zsh
 !zsh/
 !zsh/.zshrc
+!zsh/.fzf.zsh
+!zsh/.zshenv
 !zsh/.zsh_plugins.txt
 
 # Vim
