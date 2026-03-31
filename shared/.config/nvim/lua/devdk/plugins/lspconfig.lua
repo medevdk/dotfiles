@@ -114,39 +114,41 @@ return {
 			})
 			vim.lsp.enable("tailwindcss")
 
-			vim.lsp.config("gopls", {
-				cmd = { "gopls" },
-				capabilities = capabilities,
-				filetypes = { "go", "gomod", "gowork", "gotmpl" },
-				root_dir = util.root_pattern("go.mod", ".git"),
-				settings = {
-					gopls = {
-						gofumpt = true,
-						experimentalPostfixCompletions = true,
-						analyses = {
-							nilness = true,
-							unusedwrite = true,
-							useany = true,
-							unusedparams = true,
-							shadow = true,
-						},
-						hints = {
-							assignVariableTypes = true,
-							compositeLiteralFields = true,
-							compositeLiteralTypes = true,
-							constantValues = true,
-							functionTypeParameters = true,
-							parameterNames = true,
-							rangeVariableTypes = true,
-						},
-						usePlaceholders = true,
-						completeUnimported = true,
-						staticcheck = true,
-						semanticTokens = true,
-					},
-				},
-			})
-			vim.lsp.enable("gopls")
+			--Lsp for go is now handled via the go.lua plugin
+			-- vim.lsp.config("gopls", {
+			-- 	cmd = { "gopls" },
+			-- 	capabilities = capabilities,
+			-- 	-- filetypes = { "go", "gomod", "gowork", "gotmpl" },
+			-- 	filetypes = { "go", "gomod", "gowork" },
+			-- 	root_dir = util.root_pattern("go.mod", ".git"),
+			-- 	settings = {
+			-- 		gopls = {
+			-- 			gofumpt = true,
+			-- 			experimentalPostfixCompletions = true,
+			-- 			analyses = {
+			-- 				nilness = true,
+			-- 				unusedwrite = true,
+			-- 				useany = true,
+			-- 				unusedparams = true,
+			-- 				shadow = true,
+			-- 			},
+			-- 			hints = {
+			-- 				assignVariableTypes = true,
+			-- 				compositeLiteralFields = true,
+			-- 				compositeLiteralTypes = true,
+			-- 				constantValues = true,
+			-- 				functionTypeParameters = true,
+			-- 				parameterNames = true,
+			-- 				rangeVariableTypes = true,
+			-- 			},
+			-- 			usePlaceholders = true,
+			-- 			completeUnimported = true,
+			-- 			staticcheck = true,
+			-- 			semanticTokens = true,
+			-- 		},
+			-- 	},
+			-- })
+			-- vim.lsp.enable("gopls")
 
 			vim.lsp.config("htmx", {
 				capabilities = capabilities,
@@ -172,6 +174,7 @@ return {
 				end,
 			})
 
+			-- 1. Global Diagnostic & Quickfix Keys (These work always)
 			-- Toggle the Quickfix window
 			vim.keymap.set("n", "<leader>xl", "<cmd>copen<cr>", { desc = "Open Quickfix List" })
 			vim.keymap.set("n", "<leader>xc", "<cmd>cclose<cr>", { desc = "Close Quickfix List" })
@@ -185,8 +188,39 @@ return {
 				vim.diagnostic.setqflist()
 			end, { desc = "Send Diagnostics to Quickfix" })
 
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+			-- 2. LSP-Specific Keys (Only active when a server like gopls is attached)
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+				callback = function(ev)
+					-- Base options: force the mapping to be local to this specific buffer
+					local opts = { buffer = ev.buf }
+
+					-- Helper function to keep things readable and "self-documenting"
+					local map = function(keys, func, descr)
+						vim.keymap.set("n", keys, func, {
+							buffer = ev.buff,
+							desc = "LSP: " .. desc,
+						})
+					end
+
+					-- Navigation
+					map("gd", vim.lsp.buf.definition, "Goto Definition")
+					map("gr", vim.lsp.buf.references, "Goto References")
+					map("gi", vim.lsp.buf.implementation, "Goto Implementation")
+					map("gt", vim.lsp.buf.type_definition, "Goto Type Definition")
+					map("K", vim.lsp.buf.hover, "Hover Documentation")
+					--
+					-- Actions & Refactoring
+					map("<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
+					map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+
+					-- Signature help (useful when typing function arguments)
+					vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, {
+						buffer = ev.buf,
+						desc = "LSP: Signature Help",
+					})
+				end,
+			})
 		end,
 	},
 }
