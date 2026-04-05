@@ -2,6 +2,33 @@ local M = {}
 
 local utils_os = require("devdk.utils.which-os")
 
+local function get_current_project()
+	-- 1. Get the current directory name as a starting fallback
+	local cwd = vim.fn.getcwd()
+	local folder_name = vim.fn.fnamemodify(cwd, ":t")
+
+	-- 2. Try to find a project root (git, go.mod, etc.)
+	local project_root = vim.fs.root(0, { ".git", "go.mod", "Makefile" })
+
+	local final_name = ""
+
+	if project_root then
+		final_name = vim.fn.fnamemodify(project_root, ":t")
+	else
+		final_name = folder_name
+	end
+
+	-- 3. Clean up the result (Ensure it is a string and not nil)
+	final_name = tostring(final_name or "Inbox")
+
+	-- 4. Filter out common system/config folders
+	if final_name == "" or final_name == "." or final_name == ".config" or final_name == "nvim" then
+		return "General"
+	end
+
+	return final_name
+end
+
 function M.open_floating_note(filename)
 	local screen_w = vim.o.columns
 	local screen_h = vim.o.lines
@@ -28,43 +55,100 @@ function M.open_floating_note(filename)
 		buf = vim.api.nvim_get_current_buf()
 	end
 
-	vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
-	vim.api.nvim.set_option(buf, "bufhidden", "hide")
+	vim.bo[buf].filetype = "markdown"
+	vim.bo[buf].bufhidden = "hide"
 
 	-- Float window options
-	vim.api.nvim_win_set_option(win, "wrap", true) -- wrap long lines
-	vim.api.nvim_win_set_option(win, "cursorline", true) -- Highlight current line
+	vim.wo[win].wrap = true
+	vim.wo[win].cursorline = true
 
 	-- Auto-save on leaving and quit with 'q'
 	vim.api.nvim_buf_set_keymap(buf, "n", "q", ":x<CR>", { noremap = true, silent = true })
 	vim.api.nvim_buf_set_keymap(buf, "n", "<Esc>", ":x<CR>", { noremap = true, silent = true })
+
+	-- Toggle checkbox with <leader>x when in the note
+	vim.keymap.set("n", "<leader>x", function()
+		local line = vim.api.nvim_get_current_line()
+		if line:match("%[ %]") then
+			line = line:gsub("%[ %]", "[x]")
+		elseif line:match("%[x%]") then
+			line = line.gsub("%[x%]", "[ ]")
+		end
+		vim.api.nvim_set_current_line(line)
+	end, { buffer = buf, desc = "Toggle Checkbox" })
 end
 
-local function get_current_project()
-	-- 1. Get the current directory name as a starting fallback
-	local cwd = vim.fn.getcwd()
-	local folder_name = vim.fn.fnamemodify(cwd, ":t")
+function M.daily_log()
+	local dir = utils_os.home .. "/notes/zettelkasten/"
+	local date_id = os.date("%Y-%m-%d")
+	local filename = dir .. date_id .. "-daily.md"
+	local project_name = get_current_project()
 
-	-- 2. Try to find a project root (git, go.mod, etc.)
-	local project_root = vim.fs.root(0, { ".git", "go.mod", "Makefile" })
+	-- Check if file exists
+	local file_exists = vim.fn.filereadable(filename) == 1
 
-	local final_name = ""
+	-- Only insert the template if the file not exist or is empty
+	local lines = vim.api.nvim_buf_get_lines(0, 0, 01, false)
+	local is_empty = #lines <= 1 and (lines[1] == "" or lines[1] == nil)
 
-	if project_root then
-		final_name = vim.fn.fnamemodify(project_root, ":t")
-	else
-		final_name = folder_name
+	if not file_exists or is_empty then
+		-- 1. Get recent git commits
+		local git_lines = { "- No recent git activity" }
+		local handle = io.popen("git log -5 --pretty=format:'- %s' 2>/dev/null")
+		if handle then
+			local result = handle:read("*a")
+			handle:close()
+			if result and result ~= "" then
+				-- Split the string by newlines into a table
+				git_lines = {}
+				for line in result:gmatch("[^\r\n]+") do
+					table.insert(git_lines, line)
+				end
+			end
+		end
+
+		-- 2. Open the floating window first
+		M.open_floating_note(filename)
+
+		-- 2. Build the template table correctly
+		local template = {
+			"---",
+			"id: " .. os.date("%Y%m%d"),
+			"type: daily-log",
+			"project: " .. project_name,
+			"---",
+			"",
+			"# 📅 Daily Log: " .. date_id .. " (" .. project_name .. ")",
+			"",
+			"## 🪵 Recent Activity (Git)",
+		}
+
+		-- 3. Insert the Git lines into the template table
+		for _, line in ipairs(git_lines) do
+			table.insert(template, line)
+		end
+
+		-- 4. Add the rest of the template
+		table.insert(template, "")
+		table.insert(template, "## 🎯 Today's Focus")
+		table.insert(template, "- [ ] ")
+		table.insert(template, "")
+		table.insert(template, "## 📝 Notes & Reminders")
+		table.insert(template, "> ")
+
+		-- 5. NOW set the lines (no more newline errors!)
+		vim.api.nvim_buf_set_lines(0, 0, -1, false, template)
+
+		-- Tell Nvim this buffer IS the file on disk
+		vim.api.nvim_buf_set_name(0, filename)
+
+		-- Force a initial save so the file exists
+		vim.cmd("silent! write!")
 	end
 
-	-- 3. Clean up the result (Ensure it is a string and not nil)
-	final_name = tostring(final_name or "Inbox")
-
-	-- 4. Filter out common system/config folders
-	if final_name == "" or final_name == "." or final_name == ".config" or final_name == "nvim" then
-		return "General"
-	end
-
-	return final_name
+	-- Move cursor to the bottom and start insert mode
+	vim.cmd("normal! G")
+	vim.cmd("startinsert!")
 end
 
 function M.navigate_notes(direction)
@@ -183,11 +267,11 @@ function M.rename_note()
 
 		-- 3. Update the YAML title and H1 header in the current buffer
 		-- This replaces the first 'title: "..."' and the first '# ...'
-    pcall(function()
-      vim.cmd('silent! %s/title: ".*"/title: "' .. input .. '"/e')
-      vim.cmd("silent! %s/# .*/# " .. input .. "/e")
-      vim.cmd("write")
-    end)
+		pcall(function()
+			vim.cmd('silent! %s/title: ".*"/title: "' .. input .. '"/e')
+			vim.cmd("silent! %s/# .*/# " .. input .. "/e")
+			vim.cmd("write")
+		end)
 
 		-- 4. Global Search & Replace for [[links]]
 		-- Note: Mac 'sed' requires -i ''
@@ -198,13 +282,13 @@ function M.rename_note()
 		local escaped_old = old_link:gsub("%[", "\\%["):gsub("%]", "\\%]")
 		local escaped_new = new_link:gsub("%[", "\\%["):gsub("%]", "\\%]")
 
-    -- for MacOS and Linux
-    local sed_i = "sed -i"
-    if utils_os.is_mac then
-      sed_i = "sed -i ''" 
-    end
+		-- for MacOS and Linux
+		local sed_i = "sed -i"
+		if utils_os.is_mac then
+			sed_i = "sed -i ''"
+		end
 
-		local sed_cmd = string.format("%s 's/%s/%s/g' %s/*.md",sed_i, escaped_old, escaped_new, dir)
+		local sed_cmd = string.format("%s 's/%s/%s/g' %s/*.md", sed_i, escaped_old, escaped_new, dir)
 		vim.fn.system(sed_cmd)
 
 		vim.notify("Renamed to " .. new_filename .. " and updated all links.")
