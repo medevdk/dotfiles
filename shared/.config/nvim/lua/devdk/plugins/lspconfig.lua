@@ -114,42 +114,6 @@ return {
 			})
 			vim.lsp.enable("tailwindcss")
 
-			--Lsp for go is now handled via the go.lua plugin
-			-- vim.lsp.config("gopls", {
-			-- 	cmd = { "gopls" },
-			-- 	capabilities = capabilities,
-			-- 	-- filetypes = { "go", "gomod", "gowork", "gotmpl" },
-			-- 	filetypes = { "go", "gomod", "gowork" },
-			-- 	root_dir = util.root_pattern("go.mod", ".git"),
-			-- 	settings = {
-			-- 		gopls = {
-			-- 			gofumpt = true,
-			-- 			experimentalPostfixCompletions = true,
-			-- 			analyses = {
-			-- 				nilness = true,
-			-- 				unusedwrite = true,
-			-- 				useany = true,
-			-- 				unusedparams = true,
-			-- 				shadow = true,
-			-- 			},
-			-- 			hints = {
-			-- 				assignVariableTypes = true,
-			-- 				compositeLiteralFields = true,
-			-- 				compositeLiteralTypes = true,
-			-- 				constantValues = true,
-			-- 				functionTypeParameters = true,
-			-- 				parameterNames = true,
-			-- 				rangeVariableTypes = true,
-			-- 			},
-			-- 			usePlaceholders = true,
-			-- 			completeUnimported = true,
-			-- 			staticcheck = true,
-			-- 			semanticTokens = true,
-			-- 		},
-			-- 	},
-			-- })
-			-- vim.lsp.enable("gopls")
-
 			vim.lsp.config("htmx", {
 				capabilities = capabilities,
 				filetypes = { "html", "templ" },
@@ -180,8 +144,8 @@ return {
 			vim.keymap.set("n", "<leader>xc", "<cmd>cclose<cr>", { desc = "Close Quickfix List" })
 
 			-- Navigate through errors quickly
-			vim.keymap.set("n", "[q", "<cmd>cprev<cr>", { desc = "Previous Quickfix Item" })
-			vim.keymap.set("n", "]q", "<cmd>cnext<cr>", { desc = "Next Quickfix Item" })
+			vim.keymap.set("n", "[q", ":cprev!<cr>zz", { desc = "Previous Quickfix Item" })
+			vim.keymap.set("n", "]q", ":cnext!<cr>zz", { desc = "Next Quickfix Item" })
 
 			-- Send all current diagnostics to the Quickfix list
 			vim.keymap.set("n", "<leader>xd", function()
@@ -199,17 +163,39 @@ return {
 					local map = function(keys, func, descr)
 						vim.keymap.set("n", keys, func, {
 							buffer = ev.buff,
-							desc = "LSP: " .. desc,
+							desc = "LSP: " .. descr,
 						})
 					end
 
 					-- Navigation
 					map("gd", vim.lsp.buf.definition, "Goto Definition")
-					map("gr", vim.lsp.buf.references, "Goto References")
-					map("gi", vim.lsp.buf.implementation, "Goto Implementation")
-					map("gt", vim.lsp.buf.type_definition, "Goto Type Definition")
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
-					--
+					-- 2. Telescope-powered LSP functions (The ones that look better)
+					local ts = require("telescope.builtin")
+
+					map("gr", ts.lsp_references, "Goto References [Telescope]")
+					map("gi", ts.lsp_implementations, "Goto Implementation [Telescope]")
+					map("gt", ts.lsp_type_definitions, "Goto Type Definition [Telescope]")
+					map("<leader>dd", ts.diagnostics, "Document Diagnostics [Telescope]")
+
+					-- Diagnostic Navigation
+					map("[d", vim.diagnostic.goto_prev, "Prev Diagnostic")
+					map("]d", vim.diagnostic.goto_next, "Next Diagnostic")
+					map("<leader>ee", vim.diagnostic.open_float, "Line Diagnostics")
+
+					map("<leader>ds", function()
+						local clients = vim.lsp.get_clients({ bufnr = 0 })
+						local client = clients[1]
+
+						-- If we have a client, get its encoding; otherwise default to utf-16
+						local offset_encoding = client and client.offset_encoding or "utf-16"
+
+						require("telescope.builtin").lsp_document_symbols({
+							offset_encoding = offset_encoding,
+							-- This helps with Go function signatures in the Telescope view
+							symbol_width = 60,
+						})
+					end, "Document Symbols")
 					-- Actions & Refactoring
 					map("<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
 					map("<leader>ca", vim.lsp.buf.code_action, "Code Action")

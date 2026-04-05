@@ -59,7 +59,7 @@ alias cp="cp -i -R"
 alias mv="mv -i"
 alias rm="rm -iR"
 alias rsync="rsync -av"
-alias tree="tree -C"
+alias tree='tree -C -I "node_modules|.git" -a'
 
 #find dotfiles -H and gitignored -I too
 alias fd-"fd -H -I"
@@ -83,13 +83,23 @@ alias wget="wget --wait=2 --level=inf --limit-rate=200K --recursive --page-requi
 
 #Start or attach to a tmux session called TMUX
 alias tat="tmux attach -t TMUX || tmux new -s TMUX"
+
+# Pi infrastructure
+alias pi='ssh pi -t "tmux attach -t TMUX || tmux new -s TMUX"'
+alias pi-ping='until nc -zvw 1 $(ssh -G pi | awk "/^hostname /{print \$2}") 22 2>/dev/null; do printf "."; sleep 2; done && echo "\nPi is online!"'
 alias push-to-pi="rsync -av --copy-links --delete --exclude='.git' --exclude='.DS_Store' ~/dotfiles/pi/ pi:~/dotfiles/"
 alias pull-from-pi="rsync -av --delete --exclude='.git' pi:~/dotfiles/ ~/dotfiles/pi/"
+function pi-health() {
+  ssh pi "
+    awk '{printf \"temp=%.1f'C'\n\", \$1/1000}' /sys/class/thermal/thermal_zone0/temp
+    echo \"CPU freq: \$(( \$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq) / 1000 )) MHz\"
+  "
+}
 
 #open go webserver on iphone, scan the qr code
 #qr will open hardcoded port 3060; or qr portnumber (e.g. qr 4000)
 alias qr='_qr() { local port="${1:-3060}"; qrencode -o /tmp/qr.png -s 10 "http://$(ipconfig getifaddr en0):${port}" && open -a Safari /tmp/qr.png; }; _qr'
-#
+
 # #flatpak alias
 #localsend
 alias localsend="flatpak run org.localsend.localsend_app"

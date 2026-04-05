@@ -1,7 +1,8 @@
 return {
 	"saghen/blink.cmp",
 	dependencies = {
-		"rafamadriz/friendly-snippets",
+		-- "L3MON4D3/LuaSnip", -- The Engine
+		-- "rafamadriz/friendly-snippets", -- The Data
 		"onsails/lspkind.nvim", -- vs code like pictograms
 		"Kaiser-Yang/blink-cmp-dictionary",
 		"saghen/blink.compat",
@@ -11,14 +12,17 @@ return {
 	--@module 'blink.cmp'
 	--@type blink.cmp.Config
 	opts = {
+		snippets = {
+			preset = "default",
+		},
 		keymap = {
 			-- CTRL-Y -> accept
 			-- CTRL-P / N -> Previous / Next
-			preset = "default",
+			-- preset = "default",
 
 			--Tab / Shift TAB
-			["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
-			["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+			["<Tab>"] = { "snippet_forward", "select_next", "fallback" },
+			["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
 		},
 
 		appearance = {
