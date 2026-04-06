@@ -1,7 +1,7 @@
 local M = {}
 
 local utils_os = require("devdk.utils.which-os")
-local NOTES_DIR = utils_os.home .. "notes/zettelkasten/"
+local NOTES_DIR = utils_os.home .. "/notes/zettelkasten/"
 
 local function get_current_project()
 	-- 1. Get the current directory name as a starting fallback
