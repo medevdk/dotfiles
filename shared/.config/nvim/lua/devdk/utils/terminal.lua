@@ -25,13 +25,17 @@ M.open_floating_zsh = function()
 	-- Instant Close keymap, ESC will work for this buffer only
 	vim.keymap.set("t", "<ESC>", function()
 		if vim.api.nvim_win_is_valid(win) then
-			vim.api.nvim_win_close(win, true)
+			-- Detach tmux session before closing so it will persist
+			vim.api.nvim_chan_send(vim.bo[buf].channel, "tmux detach\r")
+			vim.defer_fn(function()
+				vim.api.nvim_win_close(win, true)
+				vim.schedule(function()
+					if vim.api.nvim_buf_is_valid(buf) then
+						vim.api.nvim_buf_delete(buf, { force = true })
+					end
+				end)
+			end, 50) -- small delay to let tmux detach before buffer dies
 		end
-		vim.schedule(function()
-			if vim.api.nvim_buf_is_valid(buf) then
-				vim.api.nvim_buf_delete(buf, { force = true })
-			end
-		end)
 	end, { buffer = buf, desc = "Close terminal popup" })
 end
 
