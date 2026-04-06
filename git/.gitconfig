@@ -31,4 +31,31 @@
   st = status
   co = checkout
   br = branch
-  lg = log --online --graph --decorate --all
+  #
+  #aliases for a better branch workflow
+  new = checkout -b   # git new feature-x (create and switch)
+  bd = branch -d      #safe delete (only if merged)
+  bdf = branch -D     # force delete (even if not merged)
+  #
+  recent = branch --sort=-committerdate --format='%(refname:short) - %(committerdate:relative)'
+  # shows branches sorted by most recently worked on, e.g:
+  # try-new-thing - 2 hours ago
+  # fix-login - 3 days ago
+  # experiment - 2 weeks ago
+  #
+	done = "!f() { git checkout main && git merge --squash \"$1\" && git commit -m \"$2\" && git branch -d \"$1\"; }; f"
+  # git done try-new-thing
+  # switches to main, squash merges the branch, deletes it —> One command
+  #
+  #diff of staged changes (what is going to commit)
+  dc = diff --cached
+  #squash merge a branch and open editor
+  msq = "!f() { git merge --squash \"$1\" && git commit; }; f" 
+  #squash merge and use default message (no editor)
+  sqm = "!f() { git merge --squash \"$1\" && git commit -m \"Merged and Squashed: $1\"; }; f"
+  lg = log --oneline --graph --decorate --all
+  #stash shorcuts
+  ss = stash save
+  sp = stash pop
+  sl = stash list
+ls = "!git config --get-regexp '^alias[.]' | sed 's/^alias[.]//; s/ / = /' | grep -v '^ls '"
