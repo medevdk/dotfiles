@@ -174,12 +174,12 @@ end
 
 -- Keymaps
 M.setup = function()
-	vim.keymap.set("n", "<leader>tg", M.generate, { desc = "GoTH: [T]empl [G]enerate" })
-	vim.keymap.set("n", "<leader>gr", M.run_server, { desc = "GoTH: [G]o [R]un/Restart Server" })
-	vim.keymap.set("n", "<leader>tc", M.build_css, { desc = "GoTH: [T]ailwind [C]ompile" })
-	vim.keymap.set("n", "<leader>gs", M.stop_server, { desc = "GoTH: [G]o [S]top Server" })
-	vim.keymap.set("n", "<leader>gd", M.dev, { desc = "GoTH: [G]oTH [D]evelop" })
-	vim.keymap.set("n", "<leader>gl", M.logs, { desc = "GoTH: [G]o [L]ogs" })
+	vim.keymap.set("n", "<leader>dd", M.dev, { desc = "GoTH: [G]oTH [D]evelop" })
+	vim.keymap.set("n", "<leader>dr", M.run_server, { desc = "GoTH: [G]o [R]un/Restart Server" })
+	vim.keymap.set("n", "<leader>ds", M.stop_server, { desc = "GoTH: [G]o [S]top Server" })
+	vim.keymap.set("n", "<leader>dl", M.logs, { desc = "GoTH: [G]o [L]ogs" })
+	vim.keymap.set("n", "<leader>dt", M.generate, { desc = "GoTH: [T]empl [G]enerate" })
+	vim.keymap.set("n", "<leader>dc", M.build_css, { desc = "GoTH: [T]ailwind [C]ompile" })
 end
 
 return M

@@ -1,6 +1,7 @@
 local M = {}
 
 local utils_os = require("devdk.utils.which-os")
+local NOTES_DIR = utils_os.home .. "notes/zettelkasten/"
 
 local function get_current_project()
 	-- 1. Get the current directory name as a starting fallback
@@ -72,14 +73,14 @@ function M.open_floating_note(filename)
 		if line:match("%[ %]") then
 			line = line:gsub("%[ %]", "[x]")
 		elseif line:match("%[x%]") then
-			line = line.gsub("%[x%]", "[ ]")
+			line = line:gsub("%[x%]", "[ ]")
 		end
 		vim.api.nvim_set_current_line(line)
 	end, { buffer = buf, desc = "Toggle Checkbox" })
 end
 
 function M.daily_log()
-	local dir = utils_os.home .. "/notes/zettelkasten/"
+	local dir = NOTES_DIR
 	local date_id = os.date("%Y-%m-%d")
 	local filename = dir .. date_id .. "-daily.md"
 	local project_name = get_current_project()
@@ -88,7 +89,7 @@ function M.daily_log()
 	local file_exists = vim.fn.filereadable(filename) == 1
 
 	-- Only insert the template if the file not exist or is empty
-	local lines = vim.api.nvim_buf_get_lines(0, 0, 01, false)
+	local lines = vim.api.nvim_buf_get_lines(0, 0, 1, false)
 	local is_empty = #lines <= 1 and (lines[1] == "" or lines[1] == nil)
 
 	if not file_exists or is_empty then
@@ -152,7 +153,7 @@ function M.daily_log()
 end
 
 function M.navigate_notes(direction)
-	local dir = utils_os.home .. "/notes/zettelkasten/"
+	local dir = NOTES_DIR
 	local current_file = vim.fn.expand("%:p")
 	local files = vim.fn.glob(dir .. "*.md", false, true)
 	table.sort(files)
@@ -179,7 +180,7 @@ function M.quick_capture()
 
 		local date_id = os.date("%Y%m%d%H%M")
 		local slug = input:gsub("%s+", "-"):lower()
-		local dir = utils_os.home .. "/notes/zettelkasten/"
+		local dir = NOTES_DIR
 
 		-- Check if slug exists
 		local check_cmd = string.format('find "%s" -name "*-%s.md"', dir, slug)
@@ -207,7 +208,7 @@ function M.quick_capture()
 
 		local template = [[---
 id: ${1:]] .. date_id .. [[}
-title:"${2:]] .. input .. [[}"
+title: "${2:]] .. input .. [[}"
 tags: [$3]
 project: "${4:]] .. project_name .. [[}"
 ---
@@ -225,7 +226,7 @@ end
 function M.rename_note()
 	local old_path = vim.api.nvim_buf_get_name(0)
 	local old_filename = vim.fn.fnamemodify(old_path, ":t")
-	local dir = utils_os.home .. "/notes/zettelkasten/"
+	local dir = NOTES_DIR
 
 	local timestamp, old_slug = old_filename:match("^(%d+)%-(.+)%.md$")
 
@@ -302,21 +303,21 @@ function M.find_backlinks()
 	end
 
 	require("telescope.builtin").live_grep({
-		search = "[[" .. filename .. "]]",
-		cwd = utils_os.home .. "/notes/zettelkasten",
+		search = "%[%[" .. filename .. "%]%]",
+		cwd = NOTES_DIR,
 		prompt_title = "Backlinks for " .. filename,
 	})
 end
 
 function M.discover_connections()
-	local query = vim.fn.expand("cword>")
+	local query = vim.fn.expand("<cword>")
 	if query == "" then
 		return
 	end
 
 	require("telescope.builtin").live_grep({
 		search = query,
-		cwd = utils_os.home .. "/notes/zettelkasten",
+		cwd = NOTES_DIR,
 		attach_mappings = function(prompt_bufnr, map)
 			local actions = require("telescope.actions")
 			local action_state = require("telescope.actions.state")
@@ -335,7 +336,7 @@ end
 function M.insert_link()
 	require("telescope.builtin").find_files({
 		prompt_title = "Insert link to Note",
-		cwd = utils_os.home .. "/notes/zettelkasten/",
+		cwd = NOTES_DIR,
 		attach_mappings = function(prompt_bufnr, map)
 			local actions = require("telescope.actions")
 			local action_state = require("telescope.actions.state")
@@ -401,7 +402,7 @@ function M.follow_link()
 	local _, _, link_text = line:find("%[%[(.-)%]%]")
 
 	if link_text then
-		local dir = utils_os.home .. "/notes/zettelkasten/"
+		local dir = NOTES_DIR
 		local find_cmd = string.format('find "%s" -name "*%s.md"', dir, link_text)
 		local handle = io.popen(find_cmd)
 		local result = handle:read("*a")

@@ -11,11 +11,7 @@ local opts = { noremap = true, silent = true }
 keymap.set("i", "jk", "<esc>", { desc = "Exit insert mode with jk" })
 keymap.set("v", "jk", "<esc>", { desc = "Exit visual mode with jk " })
 
--- in Visual mode move text with J and K - WERKT NIET
--- keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
--- keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
--- In Visual mode move text with J and K
--- Using 'force' to combine your silent/noremap opts with the description
+-- in Visual mode move text with J and K
 keymap.set("v", "J", ":m '>+1<CR>gv=gv", vim.tbl_extend("force", opts, { desc = "Move selection down" }))
 keymap.set("v", "K", ":m '<-2<CR>gv=gv", vim.tbl_extend("force", opts, { desc = "Move selection up" }))
 
@@ -39,10 +35,13 @@ keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", opts) --Toggle Minimize
 --Toggle spell checker
 keymap.set("n", "<leader>sp", ":set spell!<cr>", { desc = "Toggle spell checker" })
 
--- CUSTOM COMMAND: Start dev environment in Nvim
-vim.keymap.set("n", "<leader>rd", ":tabnew | term make dev<CR> && exit<CR>", { desc = "Run Dev Environment" })
 -- Terminal mode escape. Jump back to code
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
+
+-- CUSTOM COMMAND: open floating terminal
+vim.keymap.set("n", "<leader>fp", function()
+	require("devdk.utils").terminal.open_floating_zsh()
+end, { desc = "Floating popup terminal with tmux" })
 
 -- CUSTOM COMMAND for Zettelkasten Notes
 vim.keymap.set("n", "<leader>zb", function()
