@@ -14,6 +14,12 @@ return {
 				lua = { "stylua" },
 				go = { "goimports", "gofumpt" },
 				templ = { "templ" },
+				sql = { "sqlfluff" },
+			},
+			formatters = {
+				sqlfluff = {
+					args = { "format", "--dialect", "sqlite", "-" },
+				},
 			},
 			format_on_save = function(bufnr)
 				if vim.api.nvim_buf_get_name(bufnr):match("cheatsheet%.txt$") then
