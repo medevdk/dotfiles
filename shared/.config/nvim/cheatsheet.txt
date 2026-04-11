@@ -36,5 +36,12 @@ sh          : Highlight surrounding
 <leader>ft  : Find ToDo's
 [t ]t       : move forward / backward
 
+--- Git ---
+git new <branch>
+git done <branch> "message"
+or if it did not work out
+git co main
+git bdf <branch>
+
 <leader>ec  : Edit this cheatsheet
 q / <Esc>   : Close
