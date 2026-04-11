@@ -43,7 +43,7 @@
   # fix-login - 3 days ago
   # experiment - 2 weeks ago
   #
-	done = "!f() { git checkout main && git merge --squash \"$1\" && git commit -m \"$2\" && git branch -d \"$1\"; }; f"
+	done = "!f() { git checkout main && git merge --squash \"$1\" && git commit -m \"$2\" && git branch -D \"$1\"; }; f"
   # git done try-new-thing
   # switches to main, squash merges the branch, deletes it —> One command
   #
