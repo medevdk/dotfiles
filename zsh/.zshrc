@@ -16,7 +16,14 @@ precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
 RPROMPT='${vcs_info_msg_0_}'
-zstyle ':vcs_info:git:*' formats '%b'
+# Enable indicators for git status
+# * file is edited, but not yet git add
+# + file is added but not yet commited
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' unstagedstr '*'
+zstyle ':vcs_info:git:*' stagedstr '+'
+
+zstyle ':vcs_info:git:*' formats '%F{cyan}%b%u%c%f'
 
 #Tab completion
 autoload -Uz compinit && compinit
