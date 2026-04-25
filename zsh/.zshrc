@@ -180,31 +180,26 @@ timezsh() {
      for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
 }
 
-export PATH="/usr/local/sbin:$PATH"
+# Homebrew (Apple Silicon)
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
+#Force homebrew sqlite
+export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 
 #Go install path
-# export PATH="$PATH:$(go env GOBIN)"
-# export GOPATH=$(go env GOPATH)
 export GOPATH="$HOME/go"
 export PATH="$PATH:$HOME/go/bin"
 
 #Mason path (run Mason installed tools in terminal)
 export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
 
-#Godoc path
-# export PATH="$HOME/Develop/go/bin:$PATH"
+# pipx
+export PATH="$PATH:$HOME/.local/bin"
 
-#Go templ 
-export PATH="$HOME/go/bin/templ:$PATH"
-
-#Mac Silicon
-export PATH=/opt/homebrew/bin:$PATH
-export PATH=/opt/homebrew/sbin:$PATH
-#Force homebrew sqlite
-export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+# Misc
+export PATH="/usr/local/sbin:$PATH"
 
 #Rust
-# export PATH=/home/devdk/.cargo/bin:$PATH
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 #Colored man pages

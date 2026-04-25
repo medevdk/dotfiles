@@ -80,10 +80,24 @@ outer.right = 2
 
     cmd-enter = 'exec-and-forget open -n -a WezTerm.app'
 
+ 
+# ----- External Monitor Management --------
+# Shortcut to jump to external monitor
+alt-shift-a = 'workspace 9'
+alt-shift-b = 'workspace 2'
+
+[workspace-to-monitor-force-assignment]
+ 9 = 2 #workspace 9 lives on monitor 2
+
+[[on-window-detected]]
+ if.app-id= 'org.mozilla.firefox'
+ run = 'move-node-to-workspace 9'
+
+
 [[on-window-detected]]
   #Open Finder floating and center it
   if.app-id = 'com.apple.finder'
-  run = [ 'layout floating', 'exec-and-forget ~/.config/aerospace/center.sh']
+  run = [ 'layout floating', 'exec-and-forget ~/.config/aerospace/center.sh Finder']
 [[on-window-detected]]
   #Set Firefox History floating
   if.app-id = 'org.mozilla.firefox'
@@ -93,12 +107,11 @@ outer.right = 2
   if.app-id = 'org.mozilla-firefox'
   if.window-title-regex-substring = 'Developer Tools'
   run = [ 'layout floating']
-[[on-window-detected]]
  # Float Chrome file picker / open dialogs
+[[on-window-detected]]
   if.app-id = 'com.google.Chrome'
-  if.window-title-regex-substring = 'Finder window'
-  run = ['layout floating', 'exec-and-forget ~/.config/aerospace/center.sh']
-
+  if.window-title-regex-substring = '^Open$'
+  run = ['layout floating', 'exec-and-forget ~/.config/aerospace/center.sh "Google Chrome"']
 
 [mode.resize.binding]
     h = 'resize width -50'

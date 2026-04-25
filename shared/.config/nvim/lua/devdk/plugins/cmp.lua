@@ -61,7 +61,7 @@ return {
 		},
 
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer", "markdown", "dictionary" },
+			default = { "lsp", "path", "snippets", "buffer", "dictionary" },
 
 			providers = {
 				lsp = {
@@ -81,11 +81,11 @@ return {
 					max_items = 5,
 					score_offset = 0,
 				},
-				markdown = {
-					name = "RenderMarkdown",
-					module = "render-markdown.integ.blink",
-					fallbacks = { "lsp" },
-				},
+				-- markdown = {
+				-- 	name = "RenderMarkdown",
+				-- 	module = "render-markdown.integrations.blink",
+				-- 	fallbacks = { "lsp" },
+				-- },
 				dictionary = {
 					module = "blink-cmp-dictionary",
 					name = "Dict",

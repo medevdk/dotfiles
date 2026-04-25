@@ -23,7 +23,7 @@ return {
 			{ "saghen/blink.cmp" },
 			-- "hrsh7th/cmp-nvim-lsp",
 			{ "antosha417/nvim-lsp-file-operations", config = true },
-			{ "folke/neodev.nvim", opts = {} },
+			{ "folke/lazydev.nvim", opts = {} },
 			{ "j-hui/fidget.nvim", opts = {} },
 		},
 
@@ -162,7 +162,7 @@ return {
 					-- Helper function to keep things readable and "self-documenting"
 					local map = function(keys, func, descr)
 						vim.keymap.set("n", keys, func, {
-							buffer = ev.buff,
+							buffer = ev.buf,
 							desc = "LSP: " .. descr,
 						})
 					end
