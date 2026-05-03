@@ -1,10 +1,10 @@
 -- As config is symlinked:
 vim.opt.backupcopy = "yes"
 
-require("devdk.core.init")
-require("devdk.core.keymaps")
-require("devdk.utils")
-require("devdk.core.cheatsheet")
-require("devdk.core.goth").setup()
-require("devdk.core.sql").setup()
-require("devdk.lazy")
+require("core.init")
+require("core.keymaps")
+require("utils")
+require("core.cheatsheet")
+require("core.goth").setup()
+require("core.sql").setup()
+require("pluginmanager")

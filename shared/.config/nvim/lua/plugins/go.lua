@@ -1,3 +1,4 @@
+-- go.lua
 return {
 	"ray-x/go.nvim",
 	dependencies = {

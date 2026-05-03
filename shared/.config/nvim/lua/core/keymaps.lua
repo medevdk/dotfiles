@@ -1,7 +1,7 @@
 vim.g.mapleader = " " -- Keep at top file
 
 local keymap = vim.keymap
-local notes = require("devdk.utils.zettelkasten") -- for Zettelkasten keymappings
+local notes = require("utils.zettelkasten") -- for Zettelkasten keymappings
 
 keymap.set("n", "-", vim.cmd.Ex)
 
@@ -40,13 +40,13 @@ vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
 
 -- CUSTOM COMMAND: open floating terminal
 vim.keymap.set("n", "<leader>fp", function()
-	require("devdk.utils").terminal.open_floating_zsh()
+	require("utils").terminal.open_floating_zsh()
 end, { desc = "Floating popup terminal with tmux" })
 
 -- CUSTOM COMMAND for Zettelkasten Notes
 vim.keymap.set("n", "<leader>zb", function()
 	-- Ensure 'notes' is available in this scope
-	-- local notes = require("devdk.utils.zettelkasten")
+	-- local notes = require("utils.zettelkasten")
 
 	require("telescope.builtin").find_files({
 		prompt_title = "Zettelkasten Notes",
@@ -73,11 +73,11 @@ vim.keymap.set("n", "<leader>zc", notes.discover_connections, { desc = "Notes: D
 vim.keymap.set("n", "<leader>zf", notes.follow_link, { desc = "Notes: Follow Link" })
 vim.keymap.set("n", "<leader>zr", notes.rename_note, { desc = "Notes: Rename Note" })
 vim.keymap.set("n", "<leader>zd", function()
-	require("devdk.utils.zettelkasten").daily_log()
+	require("utils.zettelkasten").daily_log()
 end, { desc = "Open daily Zettel log" })
 vim.keymap.set("n", "]n", function()
-	require("devdk.utils.zettelkasten").navigate_notes(1)
+	require("utils.zettelkasten").navigate_notes(1)
 end, { desc = "Next Note" })
 vim.keymap.set("n", "[n", function()
-	require("devdk.utils.zettelkasten").navigate_notes(-1)
+	require("utils.zettelkasten").navigate_notes(-1)
 end, { desc = "Previous Note" })

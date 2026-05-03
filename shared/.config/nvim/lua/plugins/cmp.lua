@@ -103,7 +103,7 @@ return {
 					name = "Dadbod",
 					module = "blink.compat.source",
 					enabled = function()
-						return require("devdk.core.sql").is_sql_context()
+						return require("core.sql").is_sql_context()
 					end,
 					score_offset = 100,
 				},

@@ -28,6 +28,7 @@ return {
 
 		telescope.setup({
 			defaults = {
+        follow = true,
 				vimgrep_arguments = vimgrep_arguments,
 				path_display = { "smart" },
 				-- path_display = path_display,

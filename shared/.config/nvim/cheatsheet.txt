@@ -43,5 +43,5 @@ or if it did not work out
 git co main
 git bdf <branch>
 
-<leader>ec  : Edit this cheatsheet
+<leader>ec  : Edit this cheat sheet
 q / <Esc>   : Close
