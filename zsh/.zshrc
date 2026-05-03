@@ -76,6 +76,11 @@ alias cat="bat"
 #ping only 5 times
 alias ping="ping -c 5"
 
+# use Warp mode when behind Infinity to ssh
+alias warp-on="warp-cli mode warp && warp-cli connect"
+alias warp-off="warp-cli disconnect"
+alias warp-status="curl -s https://www.cloudflare.com/cdn-cgi/trace | grep warp"
+
 #open zathura in full screen
 alias zathura="zathura --mode fullscreen"
 
