@@ -4,7 +4,7 @@ return {
 	--
 	"nvim-telescope/telescope.nvim",
 	enabled = true,
-	branch = "0.1.x",
+	-- branch = "0.1.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
@@ -28,7 +28,7 @@ return {
 
 		telescope.setup({
 			defaults = {
-        follow = true,
+				follow = true,
 				vimgrep_arguments = vimgrep_arguments,
 				path_display = { "smart" },
 				-- path_display = path_display,
