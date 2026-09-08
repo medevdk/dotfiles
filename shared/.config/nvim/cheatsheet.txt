@@ -11,7 +11,8 @@ sh          : Highlight surrounding
 <leader>zw  : Capture - Write a new note
 <leader>zb  : Browse - Find a note by name
 <leader>zl  : Insert a [[link]] to another note
-<leader>zd  : Discover - Find all notes with word under the cursor
+<leader>zc  : Discover connections - notes with word under the cursor
+<leader>zd  : Open daily Zettel log
 <leader>zf  : Follow the [[link]]
 <leader>zr  : Rename the [[link]]
 
@@ -22,6 +23,7 @@ sh          : Highlight surrounding
 <leader>xc  : Close qf list
 
 --- Go & Templ ---
+<leader>ih : Toggle inlay hints
 <leader>tr : Templ generate & air
 <leader>tf : Templ format
 <leader>go : Go run main.go
@@ -34,6 +36,10 @@ sh          : Highlight surrounding
 <leader>ff  : Find files (Telescope)
 <leader>fg  : Live grep
 <leader>ft  : Find ToDo's
+<leader>fc  : Find Templ components
+<leader>fm  : Format file / range (conform)
+<leader>fp  : Floating tmux terminal
+<leader>th  : Choose theme (Themery)
 [t ]t       : move forward / backward
 
 --- Git ---
