@@ -47,7 +47,7 @@ return {
 		-- 3. Enable it!
 		vim.lsp.enable("gopls")
 		-- Toggle Inlay Hints (The "Intellisense" visual aid)
-		vim.keymap.set("n", "<leader>th", function()
+		vim.keymap.set("n", "<leader>ih", function()
 			-- Check if the current buffer has an LSP client that supports inlay hints
 			local filter = { bufnr = 0 }
 			if vim.lsp.inlay_hint.is_enabled(filter) then

@@ -4,7 +4,7 @@ return {
 	--
 	"nvim-telescope/telescope.nvim",
 	enabled = true,
-	branch = "0.1.x",
+	-- branch = "0.1.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
@@ -28,7 +28,7 @@ return {
 
 		telescope.setup({
 			defaults = {
-        follow = true,
+				follow = true,
 				vimgrep_arguments = vimgrep_arguments,
 				path_display = { "smart" },
 				-- path_display = path_display,
@@ -81,7 +81,7 @@ return {
 		vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "[F]ind [T]odos" })
 
 		-- Usefull for GoTH: Search specifically for Templ Components
-		vim.keymap.set("n", "<leader><fc>", function()
+		vim.keymap.set("n", "<leader>fc", function()
 			builtin.live_grep({ default_text = "templ " })
 		end, { desc = "[F]ind [C]omponents" })
 
