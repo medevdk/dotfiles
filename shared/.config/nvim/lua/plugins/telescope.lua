@@ -81,7 +81,7 @@ return {
 		vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "[F]ind [T]odos" })
 
 		-- Usefull for GoTH: Search specifically for Templ Components
-		vim.keymap.set("n", "<leader><fc>", function()
+		vim.keymap.set("n", "<leader>fc", function()
 			builtin.live_grep({ default_text = "templ " })
 		end, { desc = "[F]ind [C]omponents" })
 

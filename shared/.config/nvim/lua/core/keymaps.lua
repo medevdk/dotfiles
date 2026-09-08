@@ -3,8 +3,6 @@ vim.g.mapleader = " " -- Keep at top file
 local keymap = vim.keymap
 local notes = require("utils.zettelkasten") -- for Zettelkasten keymappings
 
-keymap.set("n", "-", vim.cmd.Ex)
-
 local opts = { noremap = true, silent = true }
 
 -- in Insert and Visual mode map Esc to jk
@@ -21,11 +19,7 @@ keymap.set("n", "<leader>nh", ":noh<CR>", { desc = "Clear search highlights" })
 --Choose a theme
 keymap.set("n", "<leader>th", ":Themery<CR>", { desc = "Choose Theme" })
 
---Pane Navigation
-keymap.set("n", "<C-h>", "<C-w>h", opts) --Navigate Left
-keymap.set("n", "<C-j>", "<C-w>j", opts) --Navigate Down
-keymap.set("n", "<C-k>", "<C-w>k", opts) --Navigate Up
-keymap.set("n", "<C-l>", "<C-w>l", opts) --Navigate Right
+--Pane Navigation is handled by vim-tmux-navigator (<C-h/j/k/l>, see plugins/tmux.lua)
 
 --Window Management
 keymap.set("n", "<leader>sv", ":vsplit<CR>", opts) --Split Vertical

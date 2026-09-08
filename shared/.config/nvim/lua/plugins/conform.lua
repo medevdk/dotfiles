@@ -28,7 +28,7 @@ return {
 				return { lsp_format = "fallback", async = false, timeout_ms = 2000 }
 			end,
 		}) -- <-- this closes conform.setup()
-		vim.keymap.set({ "n", "v" }, "<leader>fp", function()
+		vim.keymap.set({ "n", "v" }, "<leader>fm", function()
 			conform.format({
 				lsp_format = "fallback",
 				async = false,
