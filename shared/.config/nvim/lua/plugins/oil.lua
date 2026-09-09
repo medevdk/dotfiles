@@ -1,5 +1,10 @@
 return {
 	"stevearc/oil.nvim",
+	-- Load at startup so Oil can replace netrw as the default file explorer
+	lazy = false,
+	keys = {
+		{ "-", "<CMD>Oil --float<CR>", desc = "Open Oil in float" },
+	},
 	opts = {
 		float = {
 			padding = 2,
@@ -35,10 +40,4 @@ return {
 		trash_command = "trash",
 		default_file_explorer = true,
 	},
-
-	config = function(_, opts)
-		require("oil").setup(opts)
-
-		vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open Oil in float" })
-	end,
 }
