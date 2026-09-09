@@ -19,7 +19,7 @@ M.open_floating_zsh = function()
 	})
 
 	-- Start the terminal
-	vim.fn.termopen("tmux new-session -A -s nvim_popup zsh")
+	vim.fn.jobstart("tmux new-session -A -s nvim_popup zsh", { term = true })
 	vim.cmd("startinsert")
 
 	-- Instant Close keymap, ESC will work for this buffer only

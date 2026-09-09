@@ -31,8 +31,6 @@ return {
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 			-- capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-			local util = require("lspconfig.util")
-
 			vim.lsp.config("lua_ls", {
 				capabilities = capabilities,
 				cmd = { "lua-language-server" },
@@ -156,9 +154,6 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 				callback = function(ev)
-					-- Base options: force the mapping to be local to this specific buffer
-					local opts = { buffer = ev.buf }
-
 					-- Helper function to keep things readable and "self-documenting"
 					local map = function(keys, func, descr)
 						vim.keymap.set("n", keys, func, {
@@ -179,8 +174,12 @@ return {
 					map("<leader>dd", ts.diagnostics, "Document Diagnostics [Telescope]")
 
 					-- Diagnostic Navigation
-					map("[d", vim.diagnostic.goto_prev, "Prev Diagnostic")
-					map("]d", vim.diagnostic.goto_next, "Next Diagnostic")
+					map("[d", function()
+						vim.diagnostic.jump({ count = -1, float = true })
+					end, "Prev Diagnostic")
+					map("]d", function()
+						vim.diagnostic.jump({ count = 1, float = true })
+					end, "Next Diagnostic")
 					map("<leader>ee", vim.diagnostic.open_float, "Line Diagnostics")
 
 					map("<leader>ds", function()
