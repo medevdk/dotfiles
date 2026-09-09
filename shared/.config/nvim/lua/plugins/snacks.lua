@@ -6,6 +6,9 @@ return {
 		notifier = { enabled = true },
 		lazygit = { enabled = true },
 		dashboard = { enabled = false },
+		-- vim.ui.input replacement (was dressing.nvim);
+		-- vim.ui.select is handled by telescope-ui-select
+		input = { enabled = true },
 	},
 	keys = {
 		{

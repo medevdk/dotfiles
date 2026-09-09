@@ -38,7 +38,7 @@ function M.open_floating_note(filename)
 
 	-- Create an normal buffer
 	local buf = vim.api.nvim_create_buf(false, false)
-	vim.api.nvim_buf_set_option(buf, "bufhidden", "hide")
+	vim.bo[buf].bufhidden = "hide"
 
 	-- Open the window
 	local win = vim.api.nvim_open_win(buf, true, {

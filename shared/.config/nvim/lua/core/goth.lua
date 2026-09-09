@@ -11,7 +11,7 @@ M.generate = function()
 				print("Templ generation complete")
 				vim.cmd("checktime")
 			else
-				vim.api.nvim_err_writeln("Templ generation failed")
+				vim.notify("Templ generation failed", vim.log.levels.ERROR)
 				vim.cmd("split | term templ generate")
 			end
 		end,
@@ -25,7 +25,7 @@ M.build_css = function()
 			if code == 0 then
 				print("Tailwind build complete")
 			else
-				vim.api.nvim_err_writeln("Tailwind build failed")
+				vim.notify("Tailwind build failed", vim.log.levels.ERROR)
 			end
 		end,
 	})
@@ -140,7 +140,7 @@ M.logs = function()
 		end
 
 		-- Auto-tail: reload the file every 2 seconds
-		local timer = vim.loop.new_timer()
+		local timer = vim.uv.new_timer()
 		timer:start(
 			0,
 			2000,

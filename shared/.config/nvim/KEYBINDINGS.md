@@ -129,17 +129,6 @@ For the quick in-editor version, press `<leader>?` (renders `cheatsheet.txt`).
 | `q` / `<Esc>` | Save & close floating note (buffer-local, `:x`) | n | lua/utils/zettelkasten.lua |
 | `<leader>x` | Toggle checkbox `[ ]`/`[x]` (buffer-local in note) | n | lua/utils/zettelkasten.lua |
 
-## AI (gen.nvim + Ollama)
-
-| Keybinding | Action/Command | Mode | File Source |
-|---|---|---|---|
-| `<leader>aq` | Open Qwen menu (qwen2.5-coder:14b) | n, v | lua/core/keymaps.lua |
-| `<leader>ac` | Quick chat with Qwen | n | lua/core/keymaps.lua |
-| `<leader>ag` | Qwen: generate component (selection) | v | lua/core/keymaps.lua |
-| `<leader>ad` | Open DeepSeek menu (deepseek-r1:14b) | n, v | lua/core/keymaps.lua |
-| `<leader>ar` | DeepSeek: deep reasoning (selection) | v | lua/core/keymaps.lua |
-| `<leader>as` | DeepSeek: analyze project structure | n | lua/core/keymaps.lua |
-
 ## Terminal
 
 | Keybinding | Action/Command | Mode | File Source |
@@ -175,6 +164,5 @@ For the quick in-editor version, press `<leader>?` (renders `cheatsheet.txt`).
 
 ## Notes
 
-- **Inactive bindings**: `<leader>oo` and `<leader>oG` (ollama.nvim) are defined in `lua/plugins/ollama.lua` but the plugin is disabled (`enabled = false`).
 - **Parked code**: the GoTH dev keymaps (`<leader>dd/dr/ds/dl/dt/dc`) in `lua/core/goth.lua` are commented out — `goth.setup()` currently registers nothing. The `cheatsheet.txt` entries for Templ/Tailwind (`<leader>tr/tf/go/tw/rf`) refer to these and are inactive until re-enabled.
 - `<C-h/j/k/l>` work both inside Neovim and across tmux panes via vim-tmux-navigator.
