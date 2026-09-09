@@ -53,8 +53,13 @@ function M.is_sql_context()
 	if vim.tbl_contains({ "sql", "mysql", "plsql" }, vim.bo.filetype) then
 		return true
 	end
-	local ok, node = pcall(vim.treesitter.get_node)
-	return ok and node and node:language() == "sql"
+	-- Detect an injected SQL region (e.g. a tagged Go string) at the cursor
+	local ok, lang = pcall(function()
+		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+		local parser = vim.treesitter.get_parser(0)
+		return parser:language_for_range({ row - 1, col, row - 1, col }):lang()
+	end)
+	return ok and lang == "sql"
 end
 
 -- 5. Consolidated Setup Function
