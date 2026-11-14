@@ -73,6 +73,23 @@ return {
 			},
 		})
 
+		local previewers = require("telescope.previewers")
+
+		local md_previewer = previewers.new_termopen_previewer({
+			get_command = function(entry)
+				local path = entry.path or entry.filename or entry.value
+				if path:match("%.md$") then
+					return { "glow", "-s", "dark", "-w", "80", path }
+				end
+				-- fallback for non-markdown files
+				return { "bat", "--style=plain", "--color=always", path }
+			end,
+		})
+
+		vim.keymap.set("n", "<leader>fm", function()
+			require("telescope.builtin").find_files({ previewer = md_previewer })
+		end, { desc = "Find files (rendered markdown preview)" })
+
 		-- Keymaps
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [Files]" })
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind with [G]rep" })
