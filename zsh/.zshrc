@@ -131,6 +131,109 @@ function yy() {
 	rm -f -- "$tmp"
 }
 
+# encr [-k] <dir> [output.tar.gz.age]
+#   default: encrypt with a passphrase (prompted)
+#   -k:      encrypt to your SSH public key ($TARBALL_PUBKEY, default ~/.ssh/id_ed25519.pub)
+function encr() {
+  emulate -L zsh
+  setopt pipe_fail
+  local -a use_key
+  zparseopts -D -F -- k=use_key || return 1
+  local dir=${1:?usage: tarball [-k] <dir> [output.tar.gz.age]}
+  [[ -d $dir ]] || { print -u2 "tarball: '$dir' is not a directory"; return 1 }
+  dir=${dir:a}
+
+  local -a age_args
+  if (( $#use_key )); then
+    local pub=${TARBALL_PUBKEY:-$HOME/.ssh/id_ed25519.pub}
+    [[ -r $pub ]] || { print -u2 "tarball: public key '$pub' not found"; return 1 }
+    age_args=(-R "$pub")
+  else
+    age_args=(-p)
+  fi
+
+  local name=${dir:t}
+  local out=${2:-$name-${(%):-%D{%Y%m%d-%H%M%S}}.tar.gz.age}
+  [[ -e $out ]] && { print -u2 "tarball: '$out' already exists"; return 1 }
+
+  COPYFILE_DISABLE=1 tar -czf - \
+    --exclude='.git' --exclude='node_modules' --exclude='.DS_Store' \
+    -C "${dir:h}" "$name" \
+  | age "${age_args[@]}" -o "$out" \
+  || { rm -f -- "$out"; return 1 }
+
+  print -r -- "-> $out ($(du -h -- "$out" | cut -f1))"
+}
+
+# decr <archive> [dest_dir]
+#   works out by itself whether a .age file needs a passphrase or your SSH key
+#   ($TARBALL_IDENTITY, default ~/.ssh/id_ed25519)
+function decr() {
+  emulate -L zsh
+  setopt pipe_fail
+  local f=${1:?usage: untarball <archive> [dest_dir]}
+  [[ -f $f ]] || { print -u2 "untarball: '$f' not found"; return 1 }
+
+  local dest=${2:-.}
+  mkdir -p -- "$dest" || return 1
+
+  if [[ $f == *.age ]]; then
+    local -a age_args
+        # line 2 of the age header names how it was encrypted: "-> scrypt" = passphrase
+    local hdr
+    { read -r; read -r hdr } < "$f"
+    if [[ $hdr != '-> scrypt '* ]]; then
+      local id=${TARBALL_IDENTITY:-$HOME/.ssh/id_ed25519}
+      [[ -r $id ]] || { print -u2 "untarball: identity '$id' not found"; return 1 }
+      age_args=(-i "$id")
+    fi
+    age -d "${age_args[@]}" -- "$f" | tar -xzf - -C "$dest"
+  else
+    tar -xf "$f" -C "$dest"
+  fi && print -r -- "-> extracted to ${dest:A}"
+}
+
+# #encr <dir> [name.age]
+# function encr() {
+#   emulate -L zsh
+#   setopt pipe_fail
+#   local dir=${1:?usage: tarball <dir> [output.tar.gz.age]}
+#   [[ -d $dir ]] || { print -u2 "tarball: '$dir' is not a directory"; return 1 }
+#   dir=${dir:a}
+#
+#   local name=${dir:t}
+#   local out=${2:-$name-${(%):-%D{%Y%m%d-%H%M%S}}.tar.gz.age}
+#   [[ -e $out ]] && { print -u2 "tarball: '$out' already exists"; return 1 }
+#
+#   COPYFILE_DISABLE=1 tar -czf - \
+#     --exclude='.git' --exclude='node_modules' --exclude='.DS_Store' \
+#     -C "${dir:h}" "$name" \
+#   | age -R ~/.ssh/id_ed25519.pub -o "$out" \
+#   || { rm -f -- "$out"; return 1 }
+#
+#   print -r -- "-> $out ($(du -h -- "$out" | cut -f1))"
+# }
+#
+# #decr <name.age> [dir]
+# function decr() {
+#   emulate -L zsh
+#   setopt pipe_fail
+#   local f=${1:?usage: untarball <archive> [dest_dir]}
+#   [[ -f $f ]] || { print -u2 "untarball: '$f' not found"; return 1 }
+#
+#   local dest=${2:-.}
+#   mkdir -p -- "$dest" || return 1
+#
+#   if [[ $f == *.age ]]; then
+#     age -d -i ~/.ssh/id_ed25519 "$f" | tar -xzf - -C "$dest"
+#   else
+#     tar -xf "$f" -C "$dest"
+#   fi && print -r -- "-> extracted to ${dest:A}"
+# }
+#
+
+
+
 #Set the keyboard backlight by value (use in Sway)
 function backlight() {
   readonly input=${1:?"Value missing 0...255"}
