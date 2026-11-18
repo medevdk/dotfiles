@@ -80,3 +80,5 @@ id_ed25519
 
 # OS
 Thumbs.db
+
+**/.claude/settings.local.json

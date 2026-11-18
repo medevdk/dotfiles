@@ -7,12 +7,18 @@
 	email = 12559925+medevdk@users.noreply.github.com
 [color]
 	ui = auto
-[url "git@github.com:"]
 [core]
-	excludesfile = /Users/Michiel/.gitignore_global
-	editor = vim
+	excludesfile = ~/.gitignore_global
+	editor = nvim
   autocrlf = input
-  pager = less -FRX
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  dark = true
+  line-numbers = true
+  # side-by-side = true
 [pull]
   rebase = false
 [push]
@@ -20,7 +26,7 @@
 [diff]
   colorMoved = zebra
 [merge]
-  conflictsyle = diff3
+  conflictStyle = zdiff3
 [safe]
 	directory = /usr/local/Homebrew
 [init]
@@ -55,7 +61,7 @@
   sqm = "!f() { git merge --squash \"$1\" && git commit -m \"Merged and Squashed: $1\"; }; f"
   lg = log --oneline --graph --decorate --all
   #stash shorcuts
-  ss = stash save
+  ss = stash push
   sp = stash pop
   sl = stash list
 ls = "!git config --get-regexp '^alias[.]' | sed 's/^alias[.]//; s/ / = /' | grep -v '^ls '"
